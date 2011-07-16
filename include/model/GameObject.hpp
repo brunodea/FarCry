@@ -2,20 +2,26 @@
 #define _FAR_CRY_GAMEOBJECT_HPP_
 
 #include "core/matrix_functions.hpp"
+#include "model/Shape.h"
 
 namespace model
 {
     class GameObject
     {
     public:
-        GameObject() {}
+        GameObject(const Shape &shape)
+            : m_Position(0), m_Shape(shape)
+        {}
 
         void setPos(const core::Point2 &pos) { m_Position = pos; }
         core::Point2 pos() { return m_Position; }
 
-    protected:
+        void setShape(const Shape &shape) { m_Shape = shape; }
+        Shape shape() { return m_Shape; }
+
     private:
         core::Point2 m_Position;
+        Shape m_Shape;
     };
 }
 
