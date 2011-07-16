@@ -23,3 +23,17 @@ void Unit::move()
     setPos(new_pos);
 }
 
+void Unit::speedUp()
+{
+    m_fSpeed += m_fAcceleration;
+    if(m_fSpeed > m_fMaxSpeed)
+        m_fSpeed = m_fMaxSpeed;
+}
+
+void Unit::speedDown()
+{
+    m_fSpeed -= m_fAcceleration;
+    if(m_fSpeed < 0.f)
+        m_fSpeed = 0.f;
+}
+

@@ -20,6 +20,8 @@ namespace model
         virtual void onKeyEvent(int key, int state) {}
 
         virtual void move();
+        virtual void speedUp();
+        virtual void speedDown();
 
         /* Setters & Getters */
         void setDirection(const core::Vector2 &dir) { m_Direction = dir; }
