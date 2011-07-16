@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 #include "glfw.h"
 #include "macros.h"
 #include "util/Controller.h"
@@ -6,18 +7,22 @@
 /*
  * Callback functions
  */
+void GLFWCALL mousePosCallback(int x, int y)
+{
+    std::cout << x << "," << y << std::endl;
+}
+
 void GLFWCALL keyEventCallback(int key, int state)
 {
+    util::CONTROLLER->onKeyEvent(key, state);
 }
 
 void GLFWCALL handleResize(int width, int height)
 {
     glViewport(0, 0, width, height);
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-    gluPerspective(45.f,(float)width/(float)height,0.1,5000);
+    glOrtho(0, width, height, 0, 0, 1);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -25,6 +30,7 @@ void GLFWCALL handleResize(int width, int height)
 
 void setCallBacks()
 {
+    glfwSetMousePosCallback(mousePosCallback);
     glfwSetKeyCallback(keyEventCallback);
     glfwSetWindowSizeCallback(handleResize);
 }
