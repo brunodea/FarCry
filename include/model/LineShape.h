@@ -5,8 +5,6 @@
 #include "core/Vector.hpp"
 #include "model/Shape.h"
 
-class CircleShape;
-
 namespace model
 {
     class LineShape:public Shape
@@ -24,7 +22,7 @@ namespace model
         core::Point2 m_Origin;
         core::Point2 m_Ending;
         bool intersectsLine(LineShape &line, float &s, float &t);
-        bool intersectsCircle(CircleShape *circle);
+        //bool intersectsCircle(CircleShape *circle);
     };
 }
 

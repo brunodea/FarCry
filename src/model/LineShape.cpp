@@ -79,7 +79,7 @@ bool LineShape::intersectsLine(LineShape &line, float &s, float &t)
     return false;
 }
 
-bool LineShape::intersectsCircle(CircleShape *circle)
+/*bool LineShape::intersectsCircle(CircleShape *circle)
 {
     float a, b, c, r2, delta;
 
@@ -88,3 +88,4 @@ bool LineShape::intersectsCircle(CircleShape *circle)
 
     center[0] = m_Origin[0] -
 }
+*/
