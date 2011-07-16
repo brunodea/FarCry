@@ -19,6 +19,7 @@ namespace util
 
         void onRender();
         void onUpdate();
+        void onkeyEvent(int key, int state);
 
     private:
         static Controller *m_sInstance;

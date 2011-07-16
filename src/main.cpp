@@ -8,6 +8,7 @@
  */
 void GLFWCALL keyEventCallback(int key, int state)
 {
+    CONTROLLER->onKeyEvent(key, state);
 }
 
 void GLFWCALL handleResize(int width, int height)

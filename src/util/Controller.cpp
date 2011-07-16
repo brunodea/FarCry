@@ -55,3 +55,6 @@ void Controller::onUpdate()
 {
 }
 
+void Controller::onKeyEvent()
+{
+}
