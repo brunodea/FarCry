@@ -106,14 +106,31 @@ namespace core
         return res;
     }
 
+    inline Matrix3 translate2f(float x, float y)
+    {
+        return translate(vector3f(x,y,1.f));
+    }
+
+    inline Matrix3 scale2f(float sx, float sy)
+    {
+        return scale(vector3f(sx,sy,1.f));
+    }
+
+    inline Matrix3 rotate2d(float angle)
+    {
+        Matrix3 res = identity<3>();
+        res.set(cos(ang), 0, 0);
+        res.set(cos(ang), 1, 1);
+
+        res.set(-sin(ang), 0, 1);
+        res.set(sin(ang), 1, 0);
+
+        return res;
+    }
+
     inline Matrix4 translate3f(float x, float y, float z)
     {
-        Vector4 vec(1.f);
-        vec[0] = x;
-        vec[1] = y;
-        vec[2] = z;
-
-        return translate(vec);
+        return translate(vector4f(x,y,z,1.f));
     }
 
     inline Matrix4 rotateX(float ang)
