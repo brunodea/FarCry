@@ -16,7 +16,7 @@ namespace model
         /* Virtual Functions */
         virtual void onRender() = 0;
         virtual void onUpdate() = 0;
-        virtual void onKeyEvent() {}
+        virtual void onKeyEvent(int key, int state) {}
 
         /* Setters & Getters */
 
