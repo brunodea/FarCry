@@ -11,16 +11,15 @@ namespace util
         static Controller *instance();
 
         void run();
-
-        bool isRunning() { return m_bRunning; }
+        void onKeyEvent(int key, int state);
 
     private:
         Controller();
 
         void onRender();
         void onUpdate();
-        void onkeyEvent(int key, int state);
 
+        bool isRunning() { return m_bRunning; }
     private:
         static Controller *m_sInstance;
         bool m_bRunning;

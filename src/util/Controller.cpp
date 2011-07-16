@@ -55,6 +55,6 @@ void Controller::onUpdate()
 {
 }
 
-void Controller::onKeyEvent()
+void Controller::onKeyEvent(int key, int state)
 {
 }
