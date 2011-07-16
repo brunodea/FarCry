@@ -1,3 +1,4 @@
+#include <iostream>
 #include "glfw.h"
 #include "util/Controller.h"
 
@@ -37,7 +38,6 @@ void Controller::run()
         if(cur_time - last_render > frame_interval)
         {
             last_render = glfwGetTime();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             onRender();
             glfwSwapBuffers();
         }
@@ -49,6 +49,20 @@ void Controller::run()
 
 void Controller::onRender()
 {
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glTranslatef(100.f,100.f,0.f);
+    glRotatef(90.f,0.f,0.f,1.f);
+    glBegin(GL_LINES);
+        glPushMatrix();
+            glColor3f(1.f,0.f,0.f);
+
+            glVertex2f(-50.f,0.f);
+            glVertex2f(50.f,0.f);
+        glPopMatrix();
+    glEnd();
 }
 
 void Controller::onUpdate()
