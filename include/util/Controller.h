@@ -12,8 +12,7 @@ namespace util
 
         void run();
 
-        bool isRunning() { return mbRunning; }
-        void setRunning(bool val) { mbRunning = val; }
+        bool isRunning() { return m_bRunning; }
 
     private:
         Controller();
@@ -22,8 +21,8 @@ namespace util
         void onUpdate();
 
     private:
-        static Controller *msInstance;
-        bool mbRunning;
+        static Controller *m_sInstance;
+        bool m_bRunning;
     };
 } //end of namespace util.
 #endif // _FAR_CRY_CONTROLLER_HPP_

@@ -3,18 +3,18 @@
 
 using namespace util;
 
-Controller *Controller::msInstance = NULL;
+Controller *Controller::m_sInstance = NULL;
 
 Controller::Controller()
-    : mbRunning(true)
+    : m_bRunning(true)
 {
 }
 
 Controller *Controller::instance()
 {
-    if(msInstance == NULL)
-        msInstance = new Controller();
-    return msInstance;
+    if(m_sInstance == NULL)
+        m_sInstance = new Controller();
+    return m_sInstance;
 }
 
 void Controller::run()
@@ -26,7 +26,7 @@ void Controller::run()
     double update_interval = 1.f/90.f;
 
     double cur_time = 0;
-    while(mbRunning)
+    while(isRunning())
     {
         cur_time = glfwGetTime();
         if(cur_time - last_update > update_interval)
@@ -42,7 +42,7 @@ void Controller::run()
             glfwSwapBuffers();
         }
 
-        mbRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+        m_bRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
         glfwSleep(update_interval - (cur_time + glfwGetTime()));
     }
 }
