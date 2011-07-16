@@ -1,5 +1,5 @@
-#ifndef _BRUNODEA_CG_T3_MATRIX_FUNCTIONS_HPP_
-#define _BRUNODEA_CG_T3_MATRIX_FUNCTIONS_HPP_
+#ifndef _FAR_CRY_MATRIX_FUNCTIONS_HPP_
+#define _FAR_CRY_MATRIX_FUNCTIONS_HPP_
 
 /*
  * Funcoes auxiliares relacionado a matrizes a vetores.
