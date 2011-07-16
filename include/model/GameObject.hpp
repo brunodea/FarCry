@@ -9,8 +9,8 @@ namespace model
     class GameObject
     {
     public:
-        GameObject(const Shape &shape)
-            : m_Position(0), m_Shape(shape)
+        GameObject(const Shape &shape, bool visible)
+            : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true)
         {}
 
         /* Virtual Functions */
@@ -26,9 +26,19 @@ namespace model
         void setShape(const Shape &shape) { m_Shape = shape; }
         Shape shape() { return m_Shape; }
 
+        bool isVisible() { return m_bVisible; }
+        void setVisible(bool visible) { m_bVisible = visible; }
+        void toggleVisible() { m_bVisible = !m_bVisible; }
+
+        bool exists() { return m_bExists; }
+        void setExists(bool exists) { m_bExists = exists; }
+
     private:
         core::Point2 m_Position;
         Shape m_Shape;
+
+        bool m_bVisible;
+        bool m_bExists;
     };
 }
 
