@@ -5,10 +5,21 @@ namespace model
 {
     class Shape
     {
-        public:
-            virtual bool collided(Shape*) = 0;
-        protected:
-        private:
+    public:
+        enum Type
+        {
+            LINE = 0,
+            CIRCLE,
+            POLYGON
+        };
+
+    public:
+        Shape(Type type) : m_Type(type) {}
+        virtual bool collided(Shape*) = 0;
+        Type type() { return m_Type; }
+
+    private:
+        Type m_Type;
     };
 }
 

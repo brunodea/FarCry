@@ -71,12 +71,12 @@ namespace core
             return (*this);
         }
 
-        inline Vector<T, M> &operator =(const Vector<T, M> &vec)
+        /*inline Vector<T, M> &operator =(const Vector<T, M> &vec)
         {
             for(unsigned int i = 0; i < M; i++)
                 set(vec[i], i, 0);
             return (*this);
-        }
+        }*/
     }; //end of struct Vector.
 
     template<class T, unsigned int M>

@@ -5,23 +5,26 @@
 #include "core/Vector.hpp"
 #include "model/Shape.h"
 
+class CircleShape;
+
 namespace model
 {
     class LineShape:public Shape
     {
-        public:
-            LineShape();
-            virtual ~LineShape();
-            bool collided(Shape*);
-            void setOrigin(core::Point2&);
-            void setEnding(core::Point2&);
-            core::Point2 origin();
-            core::Point2 ending();
-        protected:
-        private:
-            core::Point2 m_Origin;
-            core::Point2 m_Ending;
-            bool intersects(LineShape &line, float &s, float &t);
+    public:
+        LineShape();
+        virtual ~LineShape();
+        bool collided(Shape*);
+        void setOrigin(core::Point2&);
+        void setEnding(core::Point2&);
+        core::Point2 origin();
+        core::Point2 ending();
+
+    private:
+        core::Point2 m_Origin;
+        core::Point2 m_Ending;
+        bool intersectsLine(LineShape &line, float &s, float &t);
+        bool intersectsCircle(CircleShape *circle);
     };
 }
 

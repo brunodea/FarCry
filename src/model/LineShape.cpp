@@ -4,7 +4,7 @@
 using namespace model;
 
 LineShape::LineShape()
-    : m_Origin(0), m_Ending(0)
+    : Shape(Shape::LINE), m_Origin(0), m_Ending(0)
 {
 }
 
@@ -14,6 +14,24 @@ LineShape::~LineShape()
 
 bool LineShape::collided(Shape *shape)
 {
+    if(shape->type() == Shape::LINE)
+    {
+        float s = 0;
+        float t = 0;
+
+        LineShape *line = (LineShape*)shape;
+
+        return intersectsLine(*line, s, t);
+    }
+    else if(shape->type() == Shape::POLYGON)
+    {
+
+    }
+    else if(shape->type() == Shape::CIRCLE)
+    {
+
+    }
+
     return false;
 }
 
@@ -37,7 +55,7 @@ core::Point2 LineShape::ending()
     return m_Ending;
 }
 
-bool LineShape::intersects(LineShape &line, float &s, float &t)
+bool LineShape::intersectsLine(LineShape &line, float &s, float &t)
 {
     core::Point2 d = line.ending();
 
@@ -59,4 +77,14 @@ bool LineShape::intersects(LineShape &line, float &s, float &t)
     }
 
     return false;
+}
+
+bool LineShape::intersectsCircle(CircleShape *circle)
+{
+    float a, b, c, r2, delta;
+
+    core::Point2 p = circle->center();
+    core::Point2 center;
+
+    center[0] = m_Origin[0] -
 }
