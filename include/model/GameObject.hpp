@@ -13,6 +13,13 @@ namespace model
             : m_Position(0), m_Shape(shape)
         {}
 
+        /* Virtual Functions */
+        virtual void onRender() = 0;
+        virtual void onUpdate() = 0;
+        virtual void onKeyEvent() {}
+
+        /* Setters & Getters */
+
         void setPos(const core::Point2 &pos) { m_Position = pos; }
         core::Point2 pos() { return m_Position; }
 
