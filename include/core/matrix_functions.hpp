@@ -106,69 +106,6 @@ namespace core
         return res;
     }
 
-    inline Matrix3 translate2f(float x, float y)
-    {
-        return translate(vector3f(x,y,1.f));
-    }
-
-    inline Matrix3 scale2f(float sx, float sy)
-    {
-        return scale(vector3f(sx,sy,1.f));
-    }
-
-    inline Matrix3 rotate2d(float angle)
-    {
-        Matrix3 res = identity<3>();
-        res.set(cos(ang), 0, 0);
-        res.set(cos(ang), 1, 1);
-
-        res.set(-sin(ang), 0, 1);
-        res.set(sin(ang), 1, 0);
-
-        return res;
-    }
-
-    inline Matrix4 translate3f(float x, float y, float z)
-    {
-        return translate(vector4f(x,y,z,1.f));
-    }
-
-    inline Matrix4 rotateX(float ang)
-    {
-        Matrix4 res = identity<4>();
-        res.set(cos(ang), 1, 1);
-        res.set(cos(ang), 2, 2);
-
-        res.set(sin(ang), 2, 1);
-        res.set(-sin(ang), 1, 2);
-
-        return res;
-    }
-
-    inline Matrix4 rotateY(float ang)
-    {
-        Matrix4 res = identity<4>();
-        res.set(cos(ang), 0, 0);
-        res.set(cos(ang), 2, 2);
-
-        res.set(sin(ang), 0, 2);
-        res.set(-sin(ang), 2, 0);
-
-        return res;
-    }
-
-    inline Matrix4 rotateZ(float ang)
-    {
-        Matrix4 res = identity<4>();
-        res.set(cos(ang), 0, 0);
-        res.set(cos(ang), 1, 1);
-
-        res.set(sin(ang), 1, 0);
-        res.set(-sin(ang), 0, 1);
-
-        return res;
-    }
-
     template<unsigned int M>
     inline Matrix<float, M> scale(const Vector<float, M> &vec)
     {
@@ -177,16 +114,6 @@ namespace core
             res.set(vec(i,0),i,i);
 
         return res;
-    }
-
-    inline Matrix4 scale3f(float sx, float sy, float sz)
-    {
-        Vector4 vec(1.f);
-        vec[0] = sx;
-        vec[1] = sy;
-        vec[2] = sz;
-
-        return scale(vec);
     }
 
     template<unsigned int M>
@@ -267,7 +194,7 @@ namespace core
 
     inline Vector4 toVector4f(const Vector3 &v)
     {
-        return vector4f(v(0,0),v(1,0),v(2,0),1);
+        return vector4f(v(0,0),v(1,0),v(2,0),1.f);
     }
 
     inline Vector3 toVector3f(const Vector4 &v)
@@ -275,10 +202,97 @@ namespace core
         return vector3f(v(0,0),v(1,0),v(2,0));
     }
 
+    inline Vector3 toVector3f(const Vector2 &v)
+    {
+        return vector3f(v(0,0),v(1,0),1.f);
+    }
+
+
+    inline Vector2 toVector2f(const Vector3 &v)
+    {
+        return vector2f(v(0,0),v(1,0));
+    }
+
     inline float distance(const Vector3 &p1, const Vector3 &p2)
     {
         return sqrt(pow(p2(0,0)-p1(0,0),2)+pow(p2(1,0)-p1(1,0),2)+pow(p2(2,0)+p1(2,0),2));
     }
+
+
+
+    inline Matrix3 translate2f(float x, float y)
+    {
+        return translate(vector3f(x,y,1.f));
+    }
+
+    inline Matrix3 scale2f(float sx, float sy)
+    {
+        return scale(vector3f(sx,sy,1.f));
+    }
+
+    inline Matrix3 rotate2d(float ang)
+    {
+        Matrix3 res = identity<3>();
+        res.set(cos(ang), 0, 0);
+        res.set(cos(ang), 1, 1);
+
+        res.set(-sin(ang), 0, 1);
+        res.set(sin(ang), 1, 0);
+
+        return res;
+    }
+
+    inline Matrix4 translate3f(float x, float y, float z)
+    {
+        return translate(vector4f(x,y,z,1.f));
+    }
+
+    inline Matrix4 rotateX(float ang)
+    {
+        Matrix4 res = identity<4>();
+        res.set(cos(ang), 1, 1);
+        res.set(cos(ang), 2, 2);
+
+        res.set(sin(ang), 2, 1);
+        res.set(-sin(ang), 1, 2);
+
+        return res;
+    }
+
+    inline Matrix4 rotateY(float ang)
+    {
+        Matrix4 res = identity<4>();
+        res.set(cos(ang), 0, 0);
+        res.set(cos(ang), 2, 2);
+
+        res.set(sin(ang), 0, 2);
+        res.set(-sin(ang), 2, 0);
+
+        return res;
+    }
+
+    inline Matrix4 rotateZ(float ang)
+    {
+        Matrix4 res = identity<4>();
+        res.set(cos(ang), 0, 0);
+        res.set(cos(ang), 1, 1);
+
+        res.set(sin(ang), 1, 0);
+        res.set(-sin(ang), 0, 1);
+
+        return res;
+    }
+
+    inline Matrix4 scale3f(float sx, float sy, float sz)
+    {
+        Vector4 vec(1.f);
+        vec[0] = sx;
+        vec[1] = sy;
+        vec[2] = sz;
+
+        return scale(vec);
+    }
+
 } //end of namespace core.
 
 
