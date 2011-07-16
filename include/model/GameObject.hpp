@@ -10,7 +10,7 @@ namespace model
     {
     public:
         GameObject(Shape *shape, bool visible)
-            : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true)
+            : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true), m_fAngle(0.f)
         {}
 
         /* Virtual Functions */
@@ -33,12 +33,21 @@ namespace model
         bool exists() { return m_bExists; }
         void setExists(bool exists) { m_bExists = exists; }
 
+        float angle() { return m_fAngle; }
+        virtual void setAngle(float angle)
+        {
+            m_fAngle = angle;
+            //m_Shape->rotate(angle);
+        }
+
     private:
         core::Point2 m_Position;
         Shape *m_Shape;
 
         bool m_bVisible;
         bool m_bExists;
+
+        float m_fAngle;
     };
 }
 
