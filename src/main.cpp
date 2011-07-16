@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include "GL/glfw.h"
+#include "glfw.h"
 
 #define WINDOW_WIDTH 512
 #define WINDOW_HEIGHT 512
