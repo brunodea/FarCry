@@ -8,12 +8,18 @@ namespace util
     class Controller
     {
     public:
-        Controller *instance();
+        static Controller *instance();
+
+        void run();
 
         bool isRunning() { return mbRunning; }
         void setRunning(bool val) { mbRunning = val; }
+
     private:
         Controller();
+
+        void onRender();
+        void onUpdate();
 
     private:
         static Controller *msInstance;

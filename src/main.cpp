@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include "glfw.h"
+#include "macros.h"
+#include "util/Controller.h"
 
 #define WINDOW_WIDTH 512
 #define WINDOW_HEIGHT 512
@@ -38,7 +40,7 @@ void initOpenGL()
 
 void clear()
 {
-    //limpeza antes de terminar o programa.
+    delete util::CONTROLLER;
 }
 
 
@@ -57,6 +59,7 @@ int main()
     initOpenGL();
     setCallBacks();
 
+    util::CONTROLLER->run();
 
     clear();
     exit(EXIT_SUCCESS);
