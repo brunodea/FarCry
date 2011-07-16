@@ -15,7 +15,9 @@ namespace core
     typedef Vector<float, 4> Vector4;
     typedef Vector<float, 3> Vector3;
     typedef Vector<float, 2> Vector2;
-    
+
+    typedef Vector<float, 2> Point2;
+
     typedef Matrix<float, 4> Matrix4;
     typedef Matrix<float, 3> Matrix3;
     typedef Matrix<float, 2> Matrix2;
@@ -38,7 +40,7 @@ namespace core
 
         return res;
     }
-    
+
     template<unsigned int M>
     float determinant(const Matrix<float, M, M> &mat)
     {
@@ -188,7 +190,7 @@ namespace core
             res.set(vec(i,0)/n, i, 0);
         return res;
     }
-    
+
     template<unsigned int M>
     const float angle(const Vector<float, M> &v1, const Vector<float, M> &v2)
     {
@@ -215,6 +217,14 @@ namespace core
         Vector<float, M> res;
         for(unsigned int i = 0; i < M; i++)
             res[i] = mat(i, 0);
+        return res;
+    }
+
+    inline Vector2 vector2f(float x, float y)
+    {
+        Vector<float, 2> res;
+        res[0] = x;
+        res[1] = y;
         return res;
     }
 

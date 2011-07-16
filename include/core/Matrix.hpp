@@ -40,9 +40,9 @@ namespace core
 
         inline Matrix<T, M, N> &operator =(const Matrix &m)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set(m(i,j), i, j);
             }
 
@@ -51,54 +51,55 @@ namespace core
 
         inline void operator +=(const Matrix &m)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set((*this)(i,j)+m(i,j), i, j);
             }
         }
 
         inline void operator -=(const Matrix &m)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set((*this)(i,j)-m(i,j), i, j);
             }
         }
 
         inline void operator *=(const T &val)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set((*this)(i,j)*val, i, j);
             }
         }
 
         inline void operator /=(const T &val)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set((*this)(i,j)/val, i, j);
             }
         }
 
         inline void clear(const T &val)
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                     set(val, i, j);
             }
-        inline
 
-        } void print()
+        }
+
+        inline void print()
         {
-            for(unsigned int i = 0; i < m_Rows; i++)
+            for(unsigned int i = 0; i < M; i++)
             {
-                for(unsigned int j = 0; j < m_Cols; j++)
+                for(unsigned int j = 0; j < N; j++)
                 {
                     T v = (*this)(i, j);
                     std::cout << v << ' ';
@@ -111,7 +112,7 @@ namespace core
     private:
         bool is_valid(const unsigned int i, const unsigned int j)
         {
-            if(i < 0 || i >= m_Rows || j < 0 || j >= m_Cols)
+            if(i < 0 || i >= M || j < 0 || j >= N)
                 return false;
             return true;
         }

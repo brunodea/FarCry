@@ -78,7 +78,7 @@ namespace core
             return (*this);
         }
     }; //end of struct Vector.
-    
+
     template<class T, unsigned int M>
     inline Vector<T, M> operator -(const Vector<T, M> &v1, const Vector<T, M> &v2)
     {
@@ -100,7 +100,7 @@ namespace core
     template<class T, unsigned int M, unsigned int N, unsigned int P>
     inline Vector<T, M> operator *(Matrix<T, M, N> &m1, Vector<T, N> &v)
     {
-        Vector<T, M, P> res;
+        Vector<T, M> res;
         for(unsigned int i = 0; i < M; i++)
         {
             T val = 0;
