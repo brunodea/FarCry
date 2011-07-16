@@ -3,9 +3,6 @@
 #include "macros.h"
 #include "util/Controller.h"
 
-#define WINDOW_WIDTH 512
-#define WINDOW_HEIGHT 512
-
 /*
  * Callback functions
  */
