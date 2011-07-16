@@ -9,7 +9,7 @@ namespace model
     class GameObject
     {
     public:
-        GameObject(const Shape &shape, bool visible)
+        GameObject(Shape *shape, bool visible)
             : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true)
         {}
 
@@ -23,8 +23,8 @@ namespace model
         void setPos(const core::Point2 &pos) { m_Position = pos; }
         core::Point2 pos() { return m_Position; }
 
-        void setShape(const Shape &shape) { m_Shape = shape; }
-        Shape shape() { return m_Shape; }
+        void setShape(Shape *shape) { m_Shape = shape; }
+        Shape *shape() { return m_Shape; }
 
         bool isVisible() { return m_bVisible; }
         void setVisible(bool visible) { m_bVisible = visible; }
@@ -35,7 +35,7 @@ namespace model
 
     private:
         core::Point2 m_Position;
-        Shape m_Shape;
+        Shape *m_Shape;
 
         bool m_bVisible;
         bool m_bExists;
