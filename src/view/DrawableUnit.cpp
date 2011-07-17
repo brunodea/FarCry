@@ -6,11 +6,6 @@
 
 using namespace view;
 
-DrawableUnit::DrawableUnit()
-    : model::Unit(NULL, false)
-{
-}
-
 DrawableUnit::DrawableUnit(model::Shape *shape, bool visible)
     : model::Unit(shape, visible)
 {
