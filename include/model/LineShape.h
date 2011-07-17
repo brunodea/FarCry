@@ -22,6 +22,7 @@ namespace model
         core::Point2 ending();
 
         core::Point2 center();
+        void setCenter(const core::Point2 &pos);
 
     private:
         core::Point2 m_Origin;

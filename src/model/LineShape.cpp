@@ -43,3 +43,10 @@ core::Point2 LineShape::center()
     return (origin()+ending())/2.f;
 }
 
+void LineShape::setCenter(const core::Point2 &pos)
+{
+    core::Point2 diff = pos() - center();
+    m_Origin += diff;
+    m_Ending += diff;
+}
+

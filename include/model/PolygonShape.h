@@ -19,6 +19,7 @@ namespace model
         std::vector<LineShape>* lines();
 
         core::Point2 center();
+        void setCenter(const core::Point2 &pos);
 
     private:
         std::vector<LineShape> m_vLines;

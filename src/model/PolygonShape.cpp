@@ -48,3 +48,15 @@ core::Point2 PolygonShape::center()
 
     return (up_left+down_right)/2.f;
 }
+
+void PolygonShape::setCenter(const core::Point2 &pos)
+{
+    core::Point2 diff = pos - center();
+    for(unsigned int i = 0; i < m_vLines.size(); i++)
+    {
+        LineShape *line = &m_vLines.at(i);
+        line->setOrigin(line->origin()+diff);
+        line->setEnding(line->ending()+diff);
+    }
+}
+

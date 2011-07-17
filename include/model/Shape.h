@@ -20,6 +20,7 @@ namespace model
 
         virtual bool collided(Shape*) = 0;
         virtual core::Point2 center() = 0;
+        virtual void setCenter(const core::Point2 &pos) = 0;
 
 
         Type type() { return m_Type; }
