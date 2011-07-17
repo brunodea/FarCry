@@ -56,11 +56,39 @@ void Controller::onRender()
 
     glTranslatef(100.f,100.f,0.f);
 
-    model::CircleShape *shape = new model::CircleShape();
-    shape->setRadius(45);
-
     view::DrawableUnit u;
-    u.setCollisionShape(shape);
+
+    //Exemplo de DrawableUnit com LineShape como CollisionBounds
+    core::Point2 o;
+    core::Point2 e;
+
+    o[0] = 0;
+    o[1] = 0;
+    e[0] = 50;
+    e[1] = 0;
+
+    model::LineShape *line = new model::LineShape();
+    line->setOrigin(o);
+    line->setEnding(e);
+
+    u.setCollisionShape(line);
+
+    glColor3f(1, 0, 0);
+    u.draw();
+
+    //Exemplo de DrawableUnit com CircleShape como CollisionBounds
+    core::Point2 c;
+    c[0] = 0;
+    c[1] = 0;
+
+    model::CircleShape *circle = new model::CircleShape();
+    circle->setCenter(c);
+    circle->setRadius(50);
+
+    u.setCollisionShape(circle);
+
+    glTranslatef(150.f, 0, 0);
+    glColor3f(0, 1, 0);
     u.draw();
 }
 
