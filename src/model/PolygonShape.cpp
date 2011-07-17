@@ -26,3 +26,7 @@ std::vector<LineShape> *PolygonShape::lines()
 {
     return &m_vLines;
 }
+
+core::Point2 PolygonShape::center()
+{
+}

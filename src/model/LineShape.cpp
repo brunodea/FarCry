@@ -37,3 +37,9 @@ core::Point2 LineShape::ending()
 {
     return m_Ending;
 }
+
+core::Point2 LineShape::center()
+{
+    return (origin()+ending())/2.f;
+}
+
