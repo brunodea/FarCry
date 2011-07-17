@@ -1,7 +1,5 @@
 #include "util/collision_functions.h"
 
-using namespace util;
-
 bool util::testCollision(model::Shape *shape1, model::Shape *shape2)
 {
     if(shape1->type() == model::Shape::LINE)
