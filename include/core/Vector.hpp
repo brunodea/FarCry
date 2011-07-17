@@ -71,12 +71,13 @@ namespace core
             return (*this);
         }
 
-        /*inline Vector<T, M> &operator =(const Vector<T, M> &vec)
+        inline Vector<T, M> operator *(T val)
         {
-            for(unsigned int i = 0; i < M; i++)
-                set(vec[i], i, 0);
-            return (*this);
-        }*/
+            Vector<T, M> res = (*this);
+            res *= val;
+            return res;
+        }
+
     }; //end of struct Vector.
 
     template<class T, unsigned int M>
@@ -113,6 +114,14 @@ namespace core
 
     template<class T, unsigned int M>
     inline Vector<T, M> operator /(Vector<T, M> &v, T val)
+    {
+        Vector<T, M> res = v;
+        res /= val;
+        return res;
+    }
+
+    template<class T, unsigned int M>
+    inline Vector<T, M> operator /(const Vector<T, M> &v, T val)
     {
         Vector<T, M> res = v;
         res /= val;

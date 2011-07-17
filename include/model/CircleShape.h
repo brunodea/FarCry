@@ -14,9 +14,12 @@ namespace model
     public:
         CircleShape();
         virtual ~CircleShape();
+
         bool collided(Shape* shape);
+
         void setRadius(float radius);
         float radius();
+
         void setCenter(const core::Point2 &center);
         core::Point2 center();
 

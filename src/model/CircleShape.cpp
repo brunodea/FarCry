@@ -28,12 +28,12 @@ bool CircleShape::collided(Shape* shape)
     return util::testCollision(this, shape);
 }
 
-void CircleShape::setCenter(const core::Point2 &center)
-{
-    m_Center = center;
-}
-
 core::Point2 CircleShape::center()
 {
     return m_Center;
+}
+
+void CircleShape::setCenter(const core::Point2 &center)
+{
+    m_Center = center;
 }

@@ -8,16 +8,16 @@ namespace view
 {
     class DrawableUnit:public model::Unit
     {
-        public:
-            DrawableUnit();
-            DrawableUnit(model::Shape *shape, bool visible);
+    public:
+        DrawableUnit(model::Shape *shape, bool visible);
 
-            virtual ~DrawableUnit();
+        virtual ~DrawableUnit();
 
-            void onRender();
-            void onUpdate();
-            void drawBounds();
-            void drawDirection();
+        void onRender();
+        void onUpdate();
+
+        void drawBounds();
+        void drawDirection();
     };
 }
 

@@ -13,9 +13,13 @@ namespace model
     public:
         PolygonShape();
         virtual ~PolygonShape();
+
         bool collided(Shape*);
         void addLine(const LineShape&);
         std::vector<LineShape>* lines();
+
+        core::Point2 center();
+        void setCenter(const core::Point2 &pos);
 
     private:
         std::vector<LineShape> m_vLines;
