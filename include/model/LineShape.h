@@ -15,8 +15,8 @@ namespace model
         virtual ~LineShape();
         bool collided(Shape*);
 
-        void setOrigin(core::Point2&);
-        void setEnding(core::Point2&);
+        void setOrigin(const core::Point2 &);
+        void setEnding(const core::Point2 &);
 
         core::Point2 origin();
         core::Point2 ending();

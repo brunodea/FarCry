@@ -18,12 +18,12 @@ bool LineShape::collided(Shape *shape)
     return util::testCollision(this, shape);
 }
 
-void LineShape::setOrigin(core::Point2 &origin)
+void LineShape::setOrigin(const core::Point2 &origin)
 {
     m_Origin = origin;
 }
 
-void LineShape::setEnding(core::Point2 &ending)
+void LineShape::setEnding(const core::Point2 &ending)
 {
     m_Ending = ending;
 }
@@ -45,7 +45,7 @@ core::Point2 LineShape::center()
 
 void LineShape::setCenter(const core::Point2 &pos)
 {
-    core::Point2 diff = pos() - center();
+    core::Point2 diff = pos - center();
     m_Origin += diff;
     m_Ending += diff;
 }

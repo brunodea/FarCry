@@ -8,8 +8,30 @@ using namespace util;
 Controller *Controller::m_sInstance = NULL;
 
 Controller::Controller()
-    : m_bRunning(true)
+    : m_bRunning(true), m_DUnit(NULL,true)
 {
+    model::LineShape l1;
+    model::LineShape l2;
+    model::LineShape l3;
+
+    l1.setOrigin(core::point2f(-5.f,3.f)*20.f);
+    l1.setEnding(core::point2f(5.f,3.f)*20.f);
+
+    l2.setOrigin(core::point2f(-5.f,3.f)*20.f);
+    l2.setEnding(core::point2f(0.f,-5.f)*20.f);
+
+    l3.setOrigin(core::point2f(5.f,3.f)*20.f);
+    l3.setEnding(core::point2f(0.f,-5.f)*20.f);
+
+    model::PolygonShape *polygon = new model::PolygonShape();
+    polygon->addLine(l1);
+    polygon->addLine(l2);
+    polygon->addLine(l3);
+
+    m_DUnit.setShape(polygon);
+    m_DUnit.setAccel(1.f);
+    m_DUnit.setMaxSpeed(3.f);
+    m_DUnit.setDirection(core::vector2f(0.f,-1.f));
 }
 
 Controller *Controller::instance()
@@ -54,6 +76,9 @@ void Controller::onRender()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
+    glTranslatef(200, 200, 0);
+    glColor3f(1.0, 0, 1.0);
+    m_DUnit.onRender();
     /*
     glTranslatef(100.f,100.f,0.f);
 
@@ -136,8 +161,16 @@ void Controller::onRender()
 
 void Controller::onUpdate()
 {
+    m_DUnit.move();
 }
 
 void Controller::onKeyEvent(int key, int state)
 {
+    if(state == GLFW_PRESS)
+    {
+        if(key == GLFW_KEY_UP)
+            m_DUnit.speedUp();
+        else if(key == GLFW_KEY_DOWN)
+            m_DUnit.speedDown();
+    }
 }

@@ -21,7 +21,7 @@ void Unit::move()
 {
     core::Point2 new_pos = pos() + (m_Direction*m_fSpeed);
     setPos(new_pos);
-    m_Shape->setCenter(new_pos);
+    shape()->setCenter(new_pos);
 }
 
 void Unit::speedUp()

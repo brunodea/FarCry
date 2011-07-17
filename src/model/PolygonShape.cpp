@@ -55,8 +55,12 @@ void PolygonShape::setCenter(const core::Point2 &pos)
     for(unsigned int i = 0; i < m_vLines.size(); i++)
     {
         LineShape *line = &m_vLines.at(i);
-        line->setOrigin(line->origin()+diff);
-        line->setEnding(line->ending()+diff);
+
+        core::Point2 orig = line->origin()+diff;
+        core::Point2 end = line->ending()+diff;
+
+        line->setOrigin(orig);
+        line->setEnding(end);
     }
 }
 
