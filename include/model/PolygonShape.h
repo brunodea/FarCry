@@ -15,6 +15,8 @@ namespace model
         virtual ~PolygonShape();
 
         bool collided(Shape*);
+        void draw();
+
         void addLine(const LineShape&);
         std::vector<LineShape>* lines();
 

@@ -13,7 +13,9 @@ namespace model
     public:
         LineShape();
         virtual ~LineShape();
+
         bool collided(Shape*);
+        void draw();
 
         void setOrigin(const core::Point2 &);
         void setEnding(const core::Point2 &);

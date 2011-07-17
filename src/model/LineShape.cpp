@@ -1,3 +1,4 @@
+#include "glfw.h"
 #include "model/LineShape.h"
 #include "core/matrix_functions.hpp"
 #include "util/collision_functions.h"
@@ -16,6 +17,19 @@ LineShape::~LineShape()
 bool LineShape::collided(Shape *shape)
 {
     return util::testCollision(this, shape);
+}
+
+void LineShape::draw()
+{
+    core::Point2 p = origin();
+    core::Point2 d = ending();
+
+    glBegin(GL_LINES);
+
+        glVertex2f(p[0], p[1]);
+        glVertex2f(d[0], d[1]);
+
+    glEnd();
 }
 
 void LineShape::setOrigin(const core::Point2 &origin)

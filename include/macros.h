@@ -6,4 +6,6 @@
 
 #define CONTROLLER Controller::instance()
 
+#define PI 3.141592
+
 #endif // _FAR_CRY_MACROS_H_

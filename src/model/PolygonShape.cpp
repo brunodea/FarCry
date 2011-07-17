@@ -1,3 +1,4 @@
+#include "glfw.h"
 #include "model/PolygonShape.h"
 #include "util/collision_functions.h"
 
@@ -15,6 +16,23 @@ PolygonShape::~PolygonShape()
 bool PolygonShape::collided(Shape* shape)
 {
     return util::testCollision(this, shape);
+}
+
+void PolygonShape::draw()
+{
+    model::LineShape *line;
+
+    glBegin(GL_LINES);
+
+        for(unsigned int i = 0; i < lines()->size(); i++)
+        {
+            line = &lines()->at(i);
+
+            glVertex2f(line->origin()[0], line->origin()[1]);
+            glVertex2f(line->ending()[0], line->ending()[1]);
+        }
+
+    glEnd();
 }
 
 void PolygonShape::addLine(const LineShape &line)

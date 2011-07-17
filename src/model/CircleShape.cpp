@@ -1,4 +1,6 @@
 #include <math.h>
+#include "glfw.h"
+#include "macros.h"
 #include "model/CircleShape.h"
 #include "util/collision_functions.h"
 
@@ -26,6 +28,24 @@ float CircleShape::radius()
 bool CircleShape::collided(Shape* shape)
 {
     return util::testCollision(this, shape);
+}
+
+void CircleShape::draw()
+{
+    glBegin(GL_LINE_LOOP);
+
+        float x = 0.0;
+        float y = 0.0;
+
+        for(float ang = 0; ang < 2*PI; ang += 0.1)
+        {
+            x = radius() * cos(ang);
+            y = radius() * sin(ang);
+
+            glVertex2f(x, y);
+        }
+
+    glEnd();
 }
 
 core::Point2 CircleShape::center()
