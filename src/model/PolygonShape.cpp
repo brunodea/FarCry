@@ -29,4 +29,7 @@ std::vector<LineShape> *PolygonShape::lines()
 
 core::Point2 PolygonShape::center()
 {
+    core::Point2 up_left = core::point2f(999999.f, -999999.f);
+    core::Point2 down_right = up_left*(-1);
+    return up_left;
 }
