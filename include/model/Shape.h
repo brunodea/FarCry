@@ -18,8 +18,9 @@ namespace model
     public:
         Shape(Type type) : m_Type(type) {}
 
-        virtual bool collided(Shape*) = 0;
         virtual void draw() = 0;
+
+        virtual bool collided(Shape* shape) = 0;
 
         virtual core::Point2 center() = 0;
         virtual void setCenter(const core::Point2 &pos) = 0;

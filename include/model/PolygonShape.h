@@ -14,10 +14,11 @@ namespace model
         PolygonShape();
         virtual ~PolygonShape();
 
-        bool collided(Shape*);
         void draw();
 
-        void addLine(const LineShape&);
+        bool collided(Shape* shape);
+        void addLine(const LineShape &line);
+
         std::vector<LineShape>* lines();
 
         core::Point2 center();
