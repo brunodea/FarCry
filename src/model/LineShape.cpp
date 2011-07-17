@@ -1,5 +1,6 @@
 #include "model/LineShape.h"
 #include "core/matrix_functions.hpp"
+#include "util/collision_functions.h"
 
 using namespace model;
 
@@ -14,7 +15,7 @@ LineShape::~LineShape()
 
 bool LineShape::collided(Shape *shape)
 {
-
+    return util::testCollision(this, shape);
 }
 
 void LineShape::setOrigin(core::Point2 &origin)

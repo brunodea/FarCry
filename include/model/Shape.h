@@ -15,7 +15,9 @@ namespace model
 
     public:
         Shape(Type type) : m_Type(type) {}
+
         virtual bool collided(Shape*) = 0;
+
         Type type() { return m_Type; }
 
     private:

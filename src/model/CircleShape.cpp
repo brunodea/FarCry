@@ -1,5 +1,6 @@
 #include <math.h>
 #include "model/CircleShape.h"
+#include "util/collision_functions.h"
 
 using namespace model;
 
@@ -24,7 +25,7 @@ float CircleShape::radius()
 
 bool CircleShape::collided(Shape* shape)
 {
-
+    return util::testCollision(this, shape);
 }
 
 void CircleShape::setCenter(const core::Point2 &center)

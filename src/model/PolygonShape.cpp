@@ -1,4 +1,5 @@
 #include "model/PolygonShape.h"
+#include "util/collision_functions.h"
 
 using namespace model;
 
@@ -13,7 +14,7 @@ PolygonShape::~PolygonShape()
 
 bool PolygonShape::collided(Shape* shape)
 {
-
+    return util::testCollision(this, shape);
 }
 
 void PolygonShape::addLine(const LineShape &line)
