@@ -14,6 +14,11 @@ namespace model
             : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true), m_fAngle(0.f)
         {}
 
+        virtual ~GameObject()
+        {
+            delete m_Shape;
+        }
+
         /* Virtual Functions */
         virtual void onRender() = 0;
         virtual void onUpdate() = 0;
@@ -41,12 +46,7 @@ namespace model
         }
 
         float angle() { return m_fAngle; }
-        virtual void setAngle(float angle)
-        {
-             //m_Shape->rotate(-m_fAngle);
-             m_fAngle = util::radToDegree(angle);
-             //m_Shape->rotate(angle);
-        }
+        virtual void setAngle(float angle) { m_fAngle = util::radToDegree(angle); }
 
     private:
         core::Point2 m_Position;

@@ -27,6 +27,7 @@ namespace util
         bool m_bRunning;
 
         view::DrawableUnit m_DUnit;
+        view::DrawableUnit m_DCircleUnit;
     };
 } //end of namespace util.
 #endif // _FAR_CRY_CONTROLLER_HPP_

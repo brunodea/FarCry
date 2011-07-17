@@ -21,6 +21,23 @@ bool LineShape::collided(Shape *shape)
 
 void LineShape::rotate(float angle)
 {
+    core::Point2 old_center = center();
+    setCenter(core::point2f(0.f,0.f));
+
+    core::Matrix3 transf_mat = core::rotate2d(angle);
+
+    core::Point3 orig3 = core::toPoint3f(origin());
+    orig3 = transf_mat*orig3;
+    core::Point2 orig = core::toPoint2f(orig3);
+
+    core::Point3 end3 = core::toPoint3f(ending());
+    end3 = transf_mat*end3;
+    core::Point2 end = core::toPoint2f(end3);
+
+    setOrigin(orig);
+    setEnding(end);
+
+    setCenter(old_center);
 }
 
 void LineShape::draw()
