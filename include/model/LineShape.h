@@ -21,8 +21,6 @@ namespace model
     private:
         core::Point2 m_Origin;
         core::Point2 m_Ending;
-        bool intersectsLine(LineShape &line, float &s, float &t);
-        //bool intersectsCircle(CircleShape *circle);
     };
 }
 

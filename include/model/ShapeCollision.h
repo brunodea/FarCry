@@ -13,6 +13,7 @@ namespace model
         ShapeCollision();
         virtual ~ShapeCollision();
         static bool testCollision(Shape *shape1, Shape *shape2);
+    private:
         static bool testLineLineCollision(LineShape *line1, LineShape *line2);
         static bool testLineCircleCollision(LineShape *line, CircleShape *circle);
         static bool testLinePolygonCollision(LineShape *line, PolygonShape *polygon);

@@ -23,9 +23,6 @@ namespace model
     private:
         float m_Radius;
         core::Point2 m_Center;
-        bool intersectsLine(LineShape &line, float &s, float &t);
-        bool intersectsCircle(CircleShape *circle);
-        bool intersectsPolygon(PolygonShape *polygon);
     };
 }
 
