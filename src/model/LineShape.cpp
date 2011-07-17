@@ -19,6 +19,10 @@ bool LineShape::collided(Shape *shape)
     return util::testCollision(this, shape);
 }
 
+void LineShape::rotate(float angle)
+{
+}
+
 void LineShape::draw()
 {
     core::Point2 p = origin();

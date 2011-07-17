@@ -16,8 +16,8 @@ namespace model
         virtual ~CircleShape();
 
         bool collided(Shape* shape);
+        void rotate(float angle);
         void draw();
-
 
         void setRadius(float radius);
         float radius();

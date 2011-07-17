@@ -30,6 +30,10 @@ bool CircleShape::collided(Shape* shape)
     return util::testCollision(this, shape);
 }
 
+void CircleShape::rotate(float angle)
+{
+}
+
 void CircleShape::draw()
 {
     glBegin(GL_LINE_LOOP);

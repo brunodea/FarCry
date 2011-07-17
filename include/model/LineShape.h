@@ -15,6 +15,7 @@ namespace model
         virtual ~LineShape();
 
         bool collided(Shape*);
+        void rotate(float angle);
         void draw();
 
         void setOrigin(const core::Point2 &origin);

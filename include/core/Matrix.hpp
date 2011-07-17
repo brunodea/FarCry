@@ -156,6 +156,16 @@ namespace core
         return res;
     }
 
+    template<class T, unsigned int M, unsigned int N, unsigned int P>
+    inline Matrix<T, M, P> operator *(const Matrix<T, M, N> &m1, const Matrix<T, N, P> &m2)
+    {
+        Matrix<T, M, P> r1 = m1;
+        Matrix<T, M, P> r2 = m2;
+
+        Matrix<T, M, P> res = r1*r2;
+        return res;
+    }
+
     template<class T, unsigned int M, unsigned int N>
     inline Matrix<T, M, N> operator*(Matrix<T, M, N> &m, T val)
     {

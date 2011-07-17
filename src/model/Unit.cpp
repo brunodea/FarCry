@@ -1,4 +1,5 @@
 #include "model/Unit.h"
+#include "util/math_aux.hpp"
 
 using namespace model;
 
@@ -38,3 +39,14 @@ void Unit::speedDown()
         m_fSpeed = 0.f;
 }
 
+void Unit::rotate(float ang)
+{
+    setAngle(util::degreeToRad(angle())+ang);
+    shape()->rotate(ang);
+
+    core::Matrix3 transf_mat = core::rotate2d(ang);
+    core::Vector3 dir = core::toVector3f(m_Direction);
+    dir = transf_mat*dir;
+
+    m_Direction = core::toVector2f(dir);
+}

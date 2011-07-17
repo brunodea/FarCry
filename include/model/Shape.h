@@ -25,6 +25,7 @@ namespace model
         virtual core::Point2 center() = 0;
         virtual void setCenter(const core::Point2 &pos) = 0;
 
+        virtual void rotate(float angle) = 0;
 
         Type type() { return m_Type; }
 

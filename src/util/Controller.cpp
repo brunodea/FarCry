@@ -20,10 +20,10 @@ Controller::Controller()
     l1.setEnding(core::point2f(5.f,5.f)*20.f);
 
     l2.setOrigin(core::point2f(-5.f,5.f)*20.f);
-    l2.setEnding(core::point2f(0.f,-5.f)*20.f);
+    l2.setEnding(core::point2f(0.f,-10.f)*20.f);
 
     l3.setOrigin(core::point2f(5.f,5.f)*20.f);
-    l3.setEnding(core::point2f(0.f,-5.f)*20.f);
+    l3.setEnding(core::point2f(0.f,-10.f)*20.f);
 
     model::PolygonShape *polygon = new model::PolygonShape();
     polygon->addLine(l1);
@@ -96,5 +96,11 @@ void Controller::onKeyEvent(int key, int state)
             m_DUnit.speedUp();
         else if(key == GLFW_KEY_DOWN)
             m_DUnit.speedDown();
+
+        float angle = PI/50.f;
+        if(key == GLFW_KEY_LEFT)
+            m_DUnit.rotate(-angle);
+        else if(key == GLFW_KEY_RIGHT)
+            m_DUnit.rotate(angle);
     }
 }

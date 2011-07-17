@@ -14,6 +14,8 @@ namespace model
         Unit(Shape *shape, bool visible, const core::Vector2 &direction);
         Unit(Shape *shape, bool visible, const core::Vector2 &direction, float max_speed, float accel);
 
+        void rotate(float ang);
+
         /* Virtual Functions */
         virtual void onRender() = 0;
         virtual void onUpdate() = 0;

@@ -89,3 +89,26 @@ void PolygonShape::setCenter(const core::Point2 &pos)
     m_Center = pos;
 }
 
+void PolygonShape::rotate(float angle)
+{
+    core::Point2 old_center = m_Center;
+//    setCenter(core::point2f(0.f,0.f));
+    core::Matrix3 transf_mat = core::rotate2d(angle);
+
+    for(unsigned int i = 0; i < m_vLines.size(); i++)
+    {
+        LineShape *line = &m_vLines.at(i);
+
+        core::Point3 orig3 = core::toPoint3f(line->origin());
+        orig3 = transf_mat*orig3;
+        core::Point2 orig = core::toPoint2f(orig3);
+
+        core::Point3 end3 = core::toPoint3f(line->ending());
+        end3 = transf_mat*end3;
+        core::Point2 end = core::toPoint2f(end3);
+
+        line->setOrigin(orig);
+        line->setEnding(end);
+    }
+//    setCenter(old_center);
+}

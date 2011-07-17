@@ -2,6 +2,7 @@
 #define _FAR_CRY_GAMEOBJECT_HPP_
 
 #include "core/matrix_functions.hpp"
+#include "util/math_aux.hpp"
 #include "model/Shape.h"
 
 namespace model
@@ -33,11 +34,18 @@ namespace model
         bool exists() { return m_bExists; }
         void setExists(bool exists) { m_bExists = exists; }
 
+        virtual void rotate(float ang)
+        {
+            m_fAngle += util::radToDegree(ang);
+            m_Shape->rotate(ang);
+        }
+
         float angle() { return m_fAngle; }
         virtual void setAngle(float angle)
         {
-            m_fAngle = angle;
-            //m_Shape->rotate(angle);
+             //m_Shape->rotate(-m_fAngle);
+             m_fAngle = util::radToDegree(angle);
+             //m_Shape->rotate(angle);
         }
 
     private:

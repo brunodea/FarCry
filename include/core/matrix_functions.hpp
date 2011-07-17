@@ -17,6 +17,7 @@ namespace core
     typedef Vector<float, 2> Vector2;
 
     typedef Vector<float, 2> Point2;
+    typedef Vector<float, 3> Point3;
 
     typedef Matrix<float, 4> Matrix4;
     typedef Matrix<float, 3> Matrix3;
@@ -172,11 +173,6 @@ namespace core
         return res;
     }
 
-    inline Point2 point2f(float x, float y)
-    {
-        return vector2f(x,y);
-    }
-
     inline Vector3 vector3f(float x, float y, float z)
     {
         Vector<float, 3> res;
@@ -212,18 +208,35 @@ namespace core
         return vector3f(v(0,0),v(1,0),1.f);
     }
 
-
     inline Vector2 toVector2f(const Vector3 &v)
     {
         return vector2f(v(0,0),v(1,0));
+    }
+
+    inline Point2 point2f(float x, float y)
+    {
+        return vector2f(x,y);
+    }
+
+    inline Point3 point3f(float x, float y, float z)
+    {
+        return vector3f(x,y,z);
+    }
+
+    inline Point2 toPoint2f(const Point3 &p)
+    {
+        return point2f(p(0,0),p(1,0));
+    }
+
+    inline Point3 toPoint3f(const Point2 &p)
+    {
+        return point3f(p(0,0),p(1,0),1.f);
     }
 
     inline float distance(const Vector3 &p1, const Vector3 &p2)
     {
         return sqrt(pow(p2(0,0)-p1(0,0),2)+pow(p2(1,0)-p1(1,0),2)+pow(p2(2,0)+p1(2,0),2));
     }
-
-
 
     inline Matrix3 translate2f(float x, float y)
     {

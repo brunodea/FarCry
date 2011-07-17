@@ -18,6 +18,7 @@ namespace model
 
         bool collided(Shape* shape);
         void addLine(const LineShape &line);
+        void rotate(float angle);
 
         std::vector<LineShape>* lines();
 
