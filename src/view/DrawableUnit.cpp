@@ -65,6 +65,24 @@ void DrawableUnit::drawBounds()
 
         glEnd();
     }
+    else if(m_CollisionBounds->type() == model::Shape::POLYGON)
+    {
+        model::PolygonShape *polygon = (model::PolygonShape*)m_CollisionBounds;
+
+        model::LineShape *line;
+
+        glBegin(GL_LINES);
+
+        for(unsigned int i = 0; i < polygon->lines()->size(); i++)
+        {
+            line = &polygon->lines()->at(i);
+
+            glVertex2f(line->origin()[0], line->origin()[1]);
+            glVertex2f(line->ending()[0], line->ending()[1]);
+        }
+
+        glEnd();
+    }
 }
 
 void DrawableUnit::drawDirection()

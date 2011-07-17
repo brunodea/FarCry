@@ -90,6 +90,47 @@ void Controller::onRender()
     glTranslatef(150.f, 0, 0);
     glColor3f(0, 1, 0);
     u.draw();
+
+    //Exemplo de DrawableUnit com PolygonShape como CollisionBounds
+    model::LineShape l1;
+    model::LineShape l2;
+    model::LineShape l3;
+    model::LineShape l4;
+
+    core::Point2 p1;
+    core::Point2 p2;
+    core::Point2 p3;
+    core::Point2 p4;
+
+    p1[0] = -20;
+    p1[1] = -20;
+    p2[0] = 80;
+    p2[1] = -20;
+    p3[0] = 80;
+    p3[1] = 80;
+    p4[0] = -20;
+    p4[1] = 80;
+
+    l1.setOrigin(p1);
+    l1.setEnding(p2);
+    l2.setOrigin(p2);
+    l2.setEnding(p3);
+    l3.setOrigin(p3);
+    l3.setEnding(p4);
+    l4.setOrigin(p4);
+    l4.setEnding(p1);
+
+    model::PolygonShape *polygon = new model::PolygonShape();
+    polygon->addLine(l1);
+    polygon->addLine(l2);
+    polygon->addLine(l3);
+    polygon->addLine(l4);
+
+    u.setCollisionShape(polygon);
+
+    glTranslatef(0, 200, 0);
+    glColor3f(1.0, 0, 1.0);
+    u.draw();
 }
 
 void Controller::onUpdate()
