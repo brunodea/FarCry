@@ -1,5 +1,6 @@
 #include <iostream>
 #include "glfw.h"
+#include "macros.h"
 #include "util/Controller.h"
 #include "view/DrawableUnit.h"
 #include "core/matrix_functions.hpp"
@@ -15,13 +16,13 @@ Controller::Controller()
     model::LineShape l2;
     model::LineShape l3;
 
-    l1.setOrigin(core::point2f(-5.f,3.f)*20.f);
-    l1.setEnding(core::point2f(5.f,3.f)*20.f);
+    l1.setOrigin(core::point2f(-5.f,5.f)*20.f);
+    l1.setEnding(core::point2f(5.f,5.f)*20.f);
 
-    l2.setOrigin(core::point2f(-5.f,3.f)*20.f);
+    l2.setOrigin(core::point2f(-5.f,5.f)*20.f);
     l2.setEnding(core::point2f(0.f,-5.f)*20.f);
 
-    l3.setOrigin(core::point2f(5.f,3.f)*20.f);
+    l3.setOrigin(core::point2f(5.f,5.f)*20.f);
     l3.setEnding(core::point2f(0.f,-5.f)*20.f);
 
     model::PolygonShape *polygon = new model::PolygonShape();
@@ -77,7 +78,7 @@ void Controller::onRender()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glTranslatef(200, 200, 0);
+    glTranslatef(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f, 0);
     glColor3f(1.0, 0, 1.0);
     m_DUnit.onRender();
 }

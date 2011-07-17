@@ -5,7 +5,7 @@
 using namespace model;
 
 PolygonShape::PolygonShape()
-    : Shape(Shape::POLYGON), m_vLines()
+    : Shape(Shape::POLYGON), m_vLines(), m_Center(core::point2f(0.f,0.f))
 {
 }
 
@@ -38,6 +38,7 @@ void PolygonShape::draw()
 void PolygonShape::addLine(const LineShape &line)
 {
     m_vLines.push_back(line);
+    adjustCenter();
 }
 
 std::vector<LineShape> *PolygonShape::lines()
@@ -47,7 +48,12 @@ std::vector<LineShape> *PolygonShape::lines()
 
 core::Point2 PolygonShape::center()
 {
-    core::Point2 up_left = core::point2f(999999.f, -999999.f);
+    return m_Center;
+}
+
+void PolygonShape::adjustCenter()
+{
+    core::Point2 up_left = core::point2f(-999999.f, 999999.f);
     core::Point2 down_right = up_left*(-1);
 
     for(unsigned int i = 0; i < m_vLines.size(); i++)
@@ -64,12 +70,12 @@ core::Point2 PolygonShape::center()
             down_right = line->ending();
     }
 
-    return (up_left+down_right)/2.f;
+    m_Center = (up_left+down_right)/2.f;
 }
 
 void PolygonShape::setCenter(const core::Point2 &pos)
 {
-    core::Point2 diff = pos - center();
+    core::Point2 diff = pos - m_Center;
     for(unsigned int i = 0; i < m_vLines.size(); i++)
     {
         LineShape *line = &m_vLines.at(i);
@@ -80,5 +86,6 @@ void PolygonShape::setCenter(const core::Point2 &pos)
         line->setOrigin(orig);
         line->setEnding(end);
     }
+    m_Center = pos;
 }
 

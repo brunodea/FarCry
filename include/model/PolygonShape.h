@@ -25,7 +25,12 @@ namespace model
         void setCenter(const core::Point2 &pos);
 
     private:
+        void adjustCenter();
+
+    private:
         std::vector<LineShape> m_vLines;
+
+        core::Point2 m_Center;
     };
 }
 
