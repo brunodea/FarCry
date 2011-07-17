@@ -1,6 +1,7 @@
 #include <iostream>
 #include "glfw.h"
 #include "util/Controller.h"
+#include "view/DrawableUnit.h"
 
 using namespace util;
 
@@ -54,15 +55,13 @@ void Controller::onRender()
     glClear(GL_COLOR_BUFFER_BIT);
 
     glTranslatef(100.f,100.f,0.f);
-    glRotatef(90.f,0.f,0.f,1.f);
-    glBegin(GL_LINES);
-        glPushMatrix();
-            glColor3f(1.f,0.f,0.f);
 
-            glVertex2f(-50.f,0.f);
-            glVertex2f(50.f,0.f);
-        glPopMatrix();
-    glEnd();
+    model::CircleShape *shape = new model::CircleShape();
+    shape->setRadius(45);
+
+    view::DrawableUnit u;
+    u.setCollisionShape(shape);
+    u.draw();
 }
 
 void Controller::onUpdate()

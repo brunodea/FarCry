@@ -9,13 +9,14 @@ namespace model
     class GameObject
     {
     public:
+        GameObject() {}
         GameObject(Shape *shape, bool visible)
             : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true), m_fAngle(0.f)
         {}
 
         /* Virtual Functions */
-        virtual void onRender() = 0;
-        virtual void onUpdate() = 0;
+        virtual void onRender() {}
+        virtual void onUpdate() {}
         virtual void onKeyEvent(int key, int state) {}
 
         /* Setters & Getters */

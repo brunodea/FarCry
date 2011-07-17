@@ -10,13 +10,14 @@ namespace model
     class Unit : public GameObject
     {
     public:
+        Unit() {}
         Unit(Shape *shape, bool visible);
         Unit(Shape *shape, bool visible, const core::Vector2 &direction);
         Unit(Shape *shape, bool visible, const core::Vector2 &direction, float max_speed, float accel);
 
         /* Virtual Functions */
-        virtual void onRender() = 0;
-        virtual void onUpdate() = 0;
+        virtual void onRender() {}
+        virtual void onUpdate() {}
         virtual void onKeyEvent(int key, int state) {}
 
         virtual void move();
