@@ -172,6 +172,11 @@ namespace core
         return res;
     }
 
+    inline Point2 point2f(float x, float y)
+    {
+        return vector2f(x,y);
+    }
+
     inline Vector3 vector3f(float x, float y, float z)
     {
         Vector<float, 3> res;
