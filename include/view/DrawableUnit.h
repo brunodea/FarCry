@@ -9,6 +9,7 @@ namespace view
     class DrawableUnit:public model::Unit
     {
         public:
+            DrawableUnit();
             DrawableUnit(model::Shape *shape, bool visible);
 
             virtual ~DrawableUnit();

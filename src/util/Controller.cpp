@@ -2,6 +2,7 @@
 #include "glfw.h"
 #include "util/Controller.h"
 #include "view/DrawableUnit.h"
+#include "core/matrix_functions.hpp"
 
 using namespace util;
 
@@ -54,9 +55,20 @@ void Controller::onRender()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
     glTranslatef(100.f,100.f,0.f);
 
+    view::DrawableUnit u;
+
+    u.setPos(core::point2f(0, 0));
+
+    model::CircleShape circle;
+    circle.setCenter(core::point2f(0, 0));
+    circle.setRadius(60);
+
+    u.setShape(&circle);
+    u.onRender();
+
+    /*
     view::DrawableUnit u;
 
     //Exemplo de DrawableUnit com LineShape como CollisionBounds
