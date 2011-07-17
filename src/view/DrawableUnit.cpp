@@ -6,26 +6,20 @@
 
 using namespace view;
 
-DrawableUnit::DrawableUnit()
-    : Drawable()
+DrawableUnit::DrawableUnit(model::Shape *shape, bool visible)
+    : model::Unit(shape, visible)
 {
-    core::Point2 pos;
-    pos[0] = 0;
-    pos[1] = 0;
-
-    core::Point2 dir;
-    dir[0] = 1;
-    dir[1] = 0;
-
-    m_Unit.setPos(pos);
-    m_Unit.setDirection(dir);
 }
 
 DrawableUnit::~DrawableUnit()
 {
 }
 
-void DrawableUnit::draw()
+void DrawableUnit::onUpdate()
+{
+}
+
+void DrawableUnit::onRender()
 {
     drawDirection();
     drawBounds();
@@ -33,9 +27,9 @@ void DrawableUnit::draw()
 
 void DrawableUnit::drawBounds()
 {
-    if(m_CollisionBounds->type() == model::Shape::CIRCLE)
+    if(shape()->type() == model::Shape::CIRCLE)
     {
-        model::CircleShape *circle = (model::CircleShape*)m_CollisionBounds;
+        model::CircleShape *circle = (model::CircleShape*)shape();
 
         glBegin(GL_LINE_LOOP);
 
@@ -52,9 +46,9 @@ void DrawableUnit::drawBounds()
 
         glEnd();
     }
-    else if(m_CollisionBounds->type() == model::Shape::LINE)
+    else if(shape()->type() == model::Shape::LINE)
     {
-        model::LineShape *line = (model::LineShape*)m_CollisionBounds;
+        model::LineShape *line = (model::LineShape*)shape();
         core::Point2 p = line->origin();
         core::Point2 d = line->ending();
 
@@ -65,9 +59,9 @@ void DrawableUnit::drawBounds()
 
         glEnd();
     }
-    else if(m_CollisionBounds->type() == model::Shape::POLYGON)
+    else if(shape()->type() == model::Shape::POLYGON)
     {
-        model::PolygonShape *polygon = (model::PolygonShape*)m_CollisionBounds;
+        model::PolygonShape *polygon = (model::PolygonShape*)shape();
 
         model::LineShape *line;
 
@@ -87,14 +81,14 @@ void DrawableUnit::drawBounds()
 
 void DrawableUnit::drawDirection()
 {
-    core::Point2 p = m_Unit.pos();
-    core::Point2 d = m_Unit.direction();
+    core::Point2 p = pos();
+    core::Point2 d = direction();
 
     float r;
 
-    if(m_CollisionBounds->type() == model::Shape::CIRCLE)
+    if(shape()->type() == model::Shape::CIRCLE)
     {
-        r = ((model::CircleShape*)m_CollisionBounds)->radius();
+        r = ((model::CircleShape*)shape())->radius();
     }
     else
     {
@@ -107,9 +101,4 @@ void DrawableUnit::drawDirection()
     glVertex2f(d[0] * (r + (r*0.5)), d[1] * (r + (r*0.5)));
 
     glEnd();
-}
-
-void DrawableUnit::setCollisionShape(model::Shape *shape)
-{
-    m_CollisionBounds = shape;
 }

@@ -54,6 +54,7 @@ void Controller::onRender()
     glLoadIdentity();
     glClear(GL_COLOR_BUFFER_BIT);
 
+    /*
     glTranslatef(100.f,100.f,0.f);
 
     view::DrawableUnit u;
@@ -130,7 +131,7 @@ void Controller::onRender()
 
     glTranslatef(0, 200, 0);
     glColor3f(1.0, 0, 1.0);
-    u.draw();
+    u.draw();*/
 }
 
 void Controller::onUpdate()
