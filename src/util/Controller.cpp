@@ -12,24 +12,29 @@ Controller *Controller::m_sInstance = NULL;
 Controller::Controller()
     : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true)
 {
+    float s = 2.f;
     model::LineShape l1;
     model::LineShape l2;
     model::LineShape l3;
+    model::LineShape l4;
 
-    float s = 2.f;
-    l1.setOrigin(core::point2f(-5.f,5.f)*s);
-    l1.setEnding(core::point2f(5.f,5.f)*s);
+    l1.setOrigin(core::point2f(-5.f,-5.f)*s);
+    l1.setEnding(core::point2f(-5.f,5.f)*s);
 
-    l2.setOrigin(core::point2f(-5.f,5.f)*s);
-    l2.setEnding(core::point2f(0.f,-10.f)*s);
+    l2.setOrigin(core::point2f(-5.f,-5.f)*s);
+    l2.setEnding(core::point2f(5.f,-5.f)*s);
 
-    l3.setOrigin(core::point2f(5.f,5.f)*s);
-    l3.setEnding(core::point2f(0.f,-10.f)*s);
+    l3.setOrigin(core::point2f(5.f,-5.f)*s);
+    l3.setEnding(core::point2f(5.f,5.f)*s);
+
+    l4.setOrigin(core::point2f(-5.f,5.f)*s);
+    l4.setEnding(core::point2f(5.f,5.f)*s);
 
     model::PolygonShape *polygon = new model::PolygonShape();
     polygon->addLine(l1);
     polygon->addLine(l2);
     polygon->addLine(l3);
+    polygon->addLine(l4);
 
 
 //    model::CircleShape *circle1 = new model::CircleShape();
@@ -40,15 +45,15 @@ Controller::Controller()
     m_DUnit.setMaxSpeed(3.f);
     m_DUnit.setDirection(core::vector2f(0.f,-1.f));
 
-    model::CircleShape *circle = new model::CircleShape();
-    circle->setRadius(10.f*s);
+//    model::CircleShape *circle = new model::CircleShape();
+//    circle->setRadius(10.f*s);
 
-    m_DCircleUnit.setShape(circle);
-    m_DCircleUnit.setAccel(90.f);
-    m_DCircleUnit.setMaxSpeed(100.f);
-    m_DCircleUnit.setDirection(core::vector2f(1.f,1.f));
-    m_DCircleUnit.speedUp();
-    m_DCircleUnit.move();
+    m_DCircleUnit.setShape(new model::PolygonShape(*polygon));
+//    m_DCircleUnit.setAccel(90.f);
+//    m_DCircleUnit.setMaxSpeed(100.f);
+//    m_DCircleUnit.setDirection(core::vector2f(0.f,-1.f));
+//    m_DCircleUnit.speedUp();
+//    m_DCircleUnit.move();
 }
 
 Controller *Controller::instance()
@@ -110,9 +115,8 @@ void Controller::onUpdate()
         m_DUnit.rotate(angle);
 
     m_DUnit.move();
-    m_DUnit.shape()->center().print();
-//    if(m_DUnit.shape()->collided(m_DCircleUnit.shape()))
-//        std::cout << "Colidiram!\n";
+    if(m_DUnit.shape()->collided(m_DCircleUnit.shape()))
+        std::cout << "Colidiram!\n";
 }
 
 void Controller::onKeyEvent(int key, int state)

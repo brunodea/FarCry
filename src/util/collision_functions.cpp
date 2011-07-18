@@ -98,24 +98,35 @@ bool util::testLineLineCollision(model::LineShape *line1, model::LineShape *line
     core::Point2 o2 = line2->origin();
     core::Point2 e2 = line2->ending();
 
-    float det = (e2[0] * e1[1]) - (e2[1] * e1[0]);
+    float denom = ((e2[1] - o2[1])*(e1[0] - e1[0])) -
+                  ((e2[0] - o2[0])*(e1[1] - o1[1]));
 
-    core::Point2 diff = o2 - o1;
+    float nume_a = ((e2[0] - o2[0])*(o1[1] - o2[1])) -
+                   ((e2[1] - o2[1])*(o1[0] - o2[0]));
 
-    if(det * det > 0.001 * core::norm(e1) * core::norm(e2))
+    float nume_b = ((e1[0] - o1[0])*(o1[1]- o2[1])) -
+                   ((e1[1] - o1[1])*(o1[0]- o2[0]));
+
+    if(denom == 0.f)
     {
-        double invDet = 1.0/det;
-
-        float s;
-        float t;
-
-        s = (e2[0] * diff[1] - e2[1] * diff[0]) * invDet;
-        t = (e1[0] * diff[1] - e1[1] * diff[0]) * invDet;
-
-        if(t > 0 && t < 1 && s > 0 && s < 1)
+        if(nume_a == 0.f && nume_b == 0.f)
         {
-            return true;
+            return false;//true
         }
+        return false;
+    }
+
+    float ua = (float) nume_a / denom;
+    float ub = (float) nume_b / denom;
+
+    if(ua >= 0.0f && ua <= 1.0f && ub >= 0.0f && ub <= 1.0f)
+    {
+//      Get the intersection point.
+//      float x_ = o1[0] + ua*(e1[0] - o1[0]);
+//      float y_ = o1[1] + ua*(e1[1] - o1[1]);
+//      core::Point2 inters = core::point2f(x_,y_);
+
+        return false;
     }
 
     return false;
