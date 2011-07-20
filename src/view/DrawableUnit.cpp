@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 #include "glfw.h"
 #include "view/DrawableUnit.h"
 
@@ -25,6 +26,11 @@ void DrawableUnit::onRender()
 
 void DrawableUnit::drawBounds()
 {
+    core::Point2 p = pos();
+    core::Point2 d = direction();
+
+    //printf("DUnit: %.2f %.2f %.2f %.2f\n", p[0], p[1], d[0], d[1]);
+
     shape()->draw();
 }
 
@@ -38,24 +44,4 @@ void DrawableUnit::drawDirection()
         glVertex2f(p[0],p[1]);
         glVertex2f(p[0]+(d[0]*30.f),p[1]+(d[1]*30.f));
     glEnd();
-//    core::Point2 p = pos();
-//    core::Point2 d = direction();
-//
-//    float r;
-//
-//    if(shape()->type() == model::Shape::CIRCLE)
-//    {
-//        r = ((model::CircleShape*)shape())->radius();
-//    }
-//    else
-//    {
-//        r = 20;
-//    }
-//
-//    glBegin(GL_LINES);
-//
-//    glVertex2f(p[0], p[1]);
-//    glVertex2f(d[0] * (r + (r*0.5)), d[1] * (r + (r*0.5)));
-//
-//    glEnd();
 }

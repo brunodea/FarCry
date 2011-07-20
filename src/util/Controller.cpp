@@ -12,43 +12,27 @@ Controller *Controller::m_sInstance = NULL;
 Controller::Controller()
     : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true)
 {
-    model::LineShape l1;
-    model::LineShape l2;
-    model::LineShape l3;
+    model::LineShape *line = new model::LineShape();
+    line->setOrigin(core::point2f(0.f, 25.f));
+    line->setEnding(core::point2f(0.f, -25.f));
+    line->setCenter(core::point2f(0.f, 0.f));
 
-    float s = 2.f;
-    l1.setOrigin(core::point2f(-5.f,5.f)*s);
-    l1.setEnding(core::point2f(5.f,5.f)*s);
+    m_DCircleUnit.setAccel(1.f);
+    m_DCircleUnit.setSpeed(0.f);
+    m_DCircleUnit.setMaxSpeed(3.f);
+    m_DCircleUnit.setVisible(true);
+    m_DCircleUnit.setShape(line);
 
-    l2.setOrigin(core::point2f(-5.f,5.f)*s);
-    l2.setEnding(core::point2f(0.f,-10.f)*s);
+    model::LineShape *line2 = new model::LineShape();
+    line2->setOrigin(core::point2f(0.f, 25.f));
+    line2->setEnding(core::point2f(0.f, -25.f));
+    line2->setCenter(core::point2f(0.f, 0.f));
 
-    l3.setOrigin(core::point2f(5.f,5.f)*s);
-    l3.setEnding(core::point2f(0.f,-10.f)*s);
-
-    model::PolygonShape *polygon = new model::PolygonShape();
-    polygon->addLine(l1);
-    polygon->addLine(l2);
-    polygon->addLine(l3);
-
-
-//    model::CircleShape *circle1 = new model::CircleShape();
-//    circle1->setRadius(10.f*s);
-
-    m_DUnit.setShape(polygon);
     m_DUnit.setAccel(1.f);
+    m_DUnit.setSpeed(0.f);
     m_DUnit.setMaxSpeed(3.f);
-    m_DUnit.setDirection(core::vector2f(0.f,-1.f));
-
-    model::CircleShape *circle = new model::CircleShape();
-    circle->setRadius(10.f*s);
-
-    m_DCircleUnit.setShape(circle);
-    m_DCircleUnit.setAccel(90.f);
-    m_DCircleUnit.setMaxSpeed(100.f);
-    m_DCircleUnit.setDirection(core::vector2f(1.f,1.f));
-    m_DCircleUnit.speedUp();
-    m_DCircleUnit.move();
+    m_DUnit.setVisible(true);
+    m_DUnit.setShape(line2);
 }
 
 Controller *Controller::instance()
@@ -94,25 +78,29 @@ void Controller::onRender()
     glClear(GL_COLOR_BUFFER_BIT);
 
     glTranslatef(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f, 0.f);
-    glColor3f(1.0, 0, 1.0);
-    m_DUnit.onRender();
 
     glColor3f(0.f,1.f,1.f);
     m_DCircleUnit.onRender();
+    m_DUnit.onRender();
 }
 
 void Controller::onUpdate()
 {
     float angle = PI/50.f;
     if(glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS)
-        m_DUnit.rotate(-angle);
+    {
+        m_DCircleUnit.rotate(-angle);
+    }
     else if(glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS)
-        m_DUnit.rotate(angle);
+    {
+        m_DCircleUnit.rotate(angle);
+    }
 
-    m_DUnit.move();
-    m_DUnit.shape()->center().print();
-//    if(m_DUnit.shape()->collided(m_DCircleUnit.shape()))
-//        std::cout << "Colidiram!\n";
+    m_DCircleUnit.move();
+    if(m_DUnit.shape()->collided(m_DCircleUnit.shape()))
+    {
+        std::cout << "Colidiram!\n";
+    }
 }
 
 void Controller::onKeyEvent(int key, int state)
@@ -120,8 +108,8 @@ void Controller::onKeyEvent(int key, int state)
     if(state == GLFW_PRESS)
     {
         if(key == GLFW_KEY_UP)
-            m_DUnit.speedUp();
+            m_DCircleUnit.speedUp();
         else if(key == GLFW_KEY_DOWN)
-            m_DUnit.speedDown();
+            m_DCircleUnit.speedDown();
     }
 }

@@ -1,4 +1,34 @@
+#include <iostream>
 #include "util/collision_functions.h"
+
+#define Nmax 10
+
+struct point { int x, y; char c; };
+struct line { struct point p1, p2; };
+struct point polygon[Nmax];
+
+int ccw(struct point p0,
+        struct point p1,
+        struct point p2 )
+{
+    int dx1, dx2, dy1, dy2;
+    dx1 = p1.x - p0.x; dy1 = p1.y - p0.y;
+    dx2 = p2.x - p0.x; dy2 = p2.y - p0.y;
+    if (dx1*dy2 > dy1*dx2) return +1;
+    if (dx1*dy2 < dy1*dx2) return -1;
+    if ((dx1*dx2 < 0) || (dy1*dy2 < 0)) return -1;
+    if ((dx1*dx1+dy1*dy1) < (dx2*dx2+dy2*dy2))
+                                        return +1;
+    return 0;
+}
+
+int intersect(struct line l1, struct line l2)
+{
+    return ((ccw(l1.p1, l1.p2, l2.p1)
+            *ccw(l1.p1, l1.p2, l2.p2)) <= 0)
+        && ((ccw(l2.p1, l2.p2, l1.p1)
+            *ccw(l2.p1, l2.p2, l1.p2)) <= 0);
+}
 
 bool util::testCollision(model::Shape *shape1, model::Shape *shape2)
 {
@@ -93,62 +123,61 @@ bool util::testCollision(model::Shape *shape1, model::Shape *shape2)
 
 bool util::testLineLineCollision(model::LineShape *line1, model::LineShape *line2)
 {
-    core::Point2 o1 = line1->origin();
-    core::Point2 e1 = line1->ending();
-    core::Point2 o2 = line2->origin();
-    core::Point2 e2 = line2->ending();
+    struct point po1;
+    struct point pe1;
+    struct point po2;
+    struct point pe2;
 
-    float det = (e2[0] * e1[1]) - (e2[1] * e1[0]);
+    po1.x = line1->origin()[0];
+    po1.y = line1->origin()[1];
+    pe1.x = line1->ending()[0];
+    pe1.y = line1->ending()[1];
 
-    core::Point2 diff = o2 - o1;
+    po2.x = line2->origin()[0];
+    po2.y = line2->origin()[1];
+    pe2.x = line2->ending()[0];
+    pe2.y = line2->ending()[1];
 
-    if(det * det > 0.001 * core::norm(e1) * core::norm(e2))
-    {
-        double invDet = 1.0/det;
+    struct line l1;
+    l1.p1 = po1;
+    l1.p2 = pe1;
 
-        float s;
-        float t;
+    struct line l2;
+    l2.p1 = po2;
+    l2.p2 = pe2;
 
-        s = (e2[0] * diff[1] - e2[1] * diff[0]) * invDet;
-        t = (e1[0] * diff[1] - e1[1] * diff[0]) * invDet;
-
-        if(t > 0 && t < 1 && s > 0 && s < 1)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return intersect(l1, l2);
 }
 
 bool util::testLineCircleCollision(model::LineShape *line, model::CircleShape *circle)
 {
-    float a, b, c, r2, delta;
+    float aQuad, bQuad, cQuad, r2, delta;
 
-    core::Point2 p = line->origin();
-    core::Point2 d = line->ending();
-    core::Point2 circleCenter = circle->center();
-    core::Point2 center = p - circleCenter;
+    core::Vector2 pi1_2;
+    pi1_2[0] = line->origin()[0] - circle->center()[0];
+    pi1_2[1] = line->origin()[1] - circle->center()[1];
 
     r2 = circle->radius() * circle->radius();
 
-    a = d[0] * d[0] + d[1] * d[1];
-    b = 2 * (circleCenter[0] * d[0] + circleCenter[1] * d[1]);
-    c = circleCenter[0] * circleCenter[0] + circleCenter[1] * circleCenter[1] - r2;
+    aQuad = line->ending()[0]*line->ending()[0] + line->ending()[1];
+    bQuad = 2 * (pi1_2[0] * line->ending()[0] + pi1_2[1] * line->ending()[1]);
+    cQuad = pi1_2[0] * pi1_2[0] + pi1_2[1]*pi1_2[1] - r2;
 
-    delta  = b * b - 4*a*c;
+    delta = bQuad*bQuad - 4*aQuad*cQuad;
 
     if(delta < 0)
     {
         return false;
     }
-
-    float s = ((-b)+sqrt(delta)) / (2*a);
-    float t = ((-b)-sqrt(delta)) / (2*a);
-
-    if((t > 0 && t < 1) || (s > 0 && s < 1))
+    else
     {
-        return true;
+        float s = ((-bQuad)+sqrt(delta)) / (2*aQuad);
+        float t = ((-bQuad)-sqrt(delta)) / (2*aQuad);
+
+        if( (t > 0 && t < 1) || (s > 0 && s < 1) )
+        {
+            return true;
+        }
     }
 
     return false;

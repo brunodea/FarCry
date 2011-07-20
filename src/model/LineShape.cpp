@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "glfw.h"
 #include "model/LineShape.h"
 #include "core/matrix_functions.hpp"
@@ -6,8 +8,11 @@
 using namespace model;
 
 LineShape::LineShape()
-    : Shape(Shape::LINE), m_Origin(0), m_Ending(0)
+    : Shape(Shape::LINE)//, m_Origin(0), m_Ending(0)
 {
+    m_Origin = core::point2f(0.f, 0.f);
+    m_Ending = core::point2f(0.f, 0.f);
+
 }
 
 LineShape::~LineShape()
@@ -44,6 +49,8 @@ void LineShape::draw()
 {
     core::Point2 p = origin();
     core::Point2 d = ending();
+
+    //printf("Shape: %.2f %.2f %.2f %.2f\n", p[0], p[1], d[0], d[1]);
 
     glBegin(GL_LINES);
 
