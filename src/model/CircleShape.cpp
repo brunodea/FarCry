@@ -17,6 +17,8 @@ CircleShape::~CircleShape()
 
 void CircleShape::adjustVertices()
 {
+    m_vVertices.clear();
+
     float x = 0.f;
     float y = 0.f;
 
@@ -25,7 +27,7 @@ void CircleShape::adjustVertices()
         x = radius() * cos(ang);
         y = radius() * sin(ang);
 
-        m_vVertices.push_back(core::vector2f(x,y));
+        m_vVertices.push_back(core::vector2f(x + m_Center[0],y + m_Center[1]));
     }
 }
 
@@ -54,7 +56,7 @@ void CircleShape::draw()
         for(unsigned int i = 0; i < m_vVertices.size(); i++)
         {
             core::Vector2 v = m_vVertices.at(i);
-            glVertex2f(v[0]+m_Center[0],v[1]+m_Center[1]);
+            glVertex2f(v[0], v[1]);
         }
     glEnd();
 }

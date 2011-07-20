@@ -21,13 +21,13 @@ void DrawableUnit::onUpdate()
 void DrawableUnit::onRender()
 {
     drawBounds();
-    drawDirection();
+    //drawDirection();
 }
 
 void DrawableUnit::drawBounds()
 {
-    core::Point2 p = pos();
-    core::Point2 d = direction();
+    //core::Point2 p = pos();
+    //core::Point2 d = direction();
 
     //printf("DUnit: %.2f %.2f %.2f %.2f\n", p[0], p[1], d[0], d[1]);
 
