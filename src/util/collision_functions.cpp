@@ -219,7 +219,7 @@ bool util::testCirclePolygonCollision(model::CircleShape *circle, model::Polygon
         }
     }
 
-    return true;
+    return false;
 }
 
 bool util::testPolygonPolygonCollision(model::PolygonShape *polygon1, model::PolygonShape *polygon2)

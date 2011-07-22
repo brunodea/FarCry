@@ -21,7 +21,7 @@ void DrawableUnit::onUpdate()
 void DrawableUnit::onRender()
 {
     drawBounds();
-    //drawDirection();
+    drawDirection();
 }
 
 void DrawableUnit::drawBounds()
