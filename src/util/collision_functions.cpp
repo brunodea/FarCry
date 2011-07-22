@@ -4,51 +4,6 @@
 
 #define Nmax 10
 
-float min(float a, float b)
-{
-    return (a < b) ? a : b;
-}
-
-float max(float a, float b)
-{
-    return (a > b) ? a : b;
-}
-
-bool lineInCircle(float ax, float ay, float bx, float by, float cx, float cy, float cr)
-{
-    float vx = bx - ax;
-    float vy = by - ay;
-    float xdiff = ax - cx;
-    float ydiff = ay - cy;
-    float a = pow(vx, 2) + pow(vy, 2);
-    float b = 2 * ((vx * xdiff) + (vy * ydiff));
-    float c = pow(xdiff, 2) + pow(ydiff, 2) - pow(cr, 2);
-    float quad = (b*b) - (4*a*c);
-
-    if (quad >= 0)
-    {
-        std::cout << "foi\n";
-        // An infinite collision is happening, but let's not stop here
-        float quadsqrt = sqrt(quad);
-
-        for (unsigned int i = -1; i <= 1; i += 2)
-        {
-            // Returns the two coordinates of the intersection points
-            float t = (i * -b + quadsqrt) / (2 * a);
-            float x = ax + (i * vx * t);
-            float y = ay + (i * vy * t);
-
-            // If one of them is in the boundaries of the segment, it collides
-            if (x >= min(ax, bx) && x <= max(ax, bx) && y >= min(ay, by) && y <= max(ay, by))
-            {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
 struct point { int x, y; char c; };
 struct line { struct point p1, p2; };
 struct point polygon[Nmax];
@@ -197,7 +152,35 @@ bool util::testLineLineCollision(model::LineShape *line1, model::LineShape *line
 
 bool util::testLineCircleCollision(model::LineShape *line, model::CircleShape *circle)
 {
-    return lineInCircle(line->origin()[0], line->origin()[1], line->ending()[0], line->ending()[1], circle->center()[0], circle->center()[1], circle->radius());
+    core::Point2 d = line->ending() - line->origin();
+    core::Point2 f = line->origin() - circle->center();
+
+    float r = circle->radius();
+
+    float a = d.dotProduct(d);
+    float b = 2 * f.dotProduct(d);
+    float c = f.dotProduct(f) - r*r;
+
+    float discriminant = b*b-4*a*c;
+
+    if(discriminant < 0)
+    {
+        return false;
+    }
+    else
+    {
+        discriminant = sqrt(discriminant);
+
+        float t1 = (-b + discriminant)/(2*a);
+        float t2 = (-b - discriminant)/(2*a);
+
+        if((t1 >= 0 && t1 <= 1) || (t2 >= 0 && t2 <= 1))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 bool util::testLinePolygonCollision(model::LineShape *line, model::PolygonShape *polygon)
