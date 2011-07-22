@@ -11,7 +11,7 @@ namespace model
     {
     public:
         GameObject(Shape *shape, bool visible)
-            : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true), m_fAngle(0.f)
+            : m_Position(0), m_Shape(shape), m_bVisible(visible), m_bExists(true), m_fAngle(0.f), m_iType(-1)
         {}
 
         virtual ~GameObject()
@@ -49,6 +49,9 @@ namespace model
         float angle() { return m_fAngle; }
         virtual void setAngle(float angle) { m_fAngle = util::radToDegree(angle); }
 
+        int type() { return m_iType; }
+        void setType(int type) { m_iType = type; }
+
     private:
         core::Point2 m_Position;
         Shape *m_Shape;
@@ -57,6 +60,8 @@ namespace model
         bool m_bExists;
 
         float m_fAngle;
+
+        int m_iType;
     };
 }
 
