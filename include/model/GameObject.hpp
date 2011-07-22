@@ -23,6 +23,7 @@ namespace model
         virtual void onRender() = 0;
         virtual void onUpdate() = 0;
         virtual void onKeyEvent(int key, int state) {}
+        virtual void onCollision(GameObject *obj) = 0;
 
         /* Setters & Getters */
 
