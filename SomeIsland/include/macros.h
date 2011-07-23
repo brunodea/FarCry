@@ -1,5 +1,5 @@
-#ifndef _FAR_CRY_MACROS_H_
-#define _FAR_CRY_MACROS_H_
+#ifndef _SOME_ISLAND_MACROS_H_
+#define _SOME_ISLAND_MACROS_H_
 
 #define WINDOW_WIDTH 512
 #define WINDOW_HEIGHT 512
@@ -8,4 +8,4 @@
 
 #define PI 3.141592f
 
-#endif // _FAR_CRY_MACROS_H_
+#endif // _SOME_ISLAND_MACROS_H_

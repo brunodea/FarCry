@@ -2,7 +2,9 @@
 #include <iostream>
 #include "glfw.h"
 #include "macros.h"
-#include "util/Controller.h"
+#include "Controller.h"
+
+using namespace someisland;
 
 /*
  * Callback functions
@@ -14,7 +16,7 @@ void GLFWCALL mousePosCallback(int x, int y)
 
 void GLFWCALL keyEventCallback(int key, int state)
 {
-    util::CONTROLLER->onKeyEvent(key, state);
+    CONTROLLER->onKeyEvent(key, state);
 }
 
 void GLFWCALL handleResize(int width, int height)
@@ -43,7 +45,7 @@ void initOpenGL()
 
 void clear()
 {
-    delete util::CONTROLLER;
+    delete CONTROLLER;
 }
 
 
@@ -62,7 +64,7 @@ int main()
     initOpenGL();
     setCallBacks();
 
-    util::CONTROLLER->run();
+    CONTROLLER->run();
 
     clear();
     exit(EXIT_SUCCESS);

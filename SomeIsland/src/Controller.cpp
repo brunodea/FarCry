@@ -1,11 +1,10 @@
 #include <iostream>
 #include "glfw.h"
+#include "IslandEngine.h"
 #include "macros.h"
-#include "util/Controller.h"
-#include "view/DrawableUnit.h"
-#include "core/matrix_functions.hpp"
+#include "Controller.h"
 
-using namespace util;
+using namespace someisland;
 
 Controller *Controller::m_sInstance = NULL;
 
@@ -48,86 +47,6 @@ Controller::Controller()
     m_DCircleUnit.setMaxSpeed(3.f);
     m_DCircleUnit.setVisible(true);
     m_DCircleUnit.setShape(circle1);
-
-    /*
-    model::CircleShape *circle1 = new model::CircleShape();
-    circle1->setCenter(core::point2f(0.f, 0.f));
-    circle1->setRadius(20.f);
-
-    m_DUnit.setPos(core::point2f(0.f, 0.f));
-    m_DUnit.setAccel(1.f);
-    m_DUnit.setSpeed(0.f);
-    m_DUnit.setMaxSpeed(3.f);
-    m_DUnit.setVisible(true);
-    m_DUnit.setShape(circle1);
-    m_DUnit.move();
-
-    model::LineShape *line = new model::LineShape();
-    line->setOrigin(core::point2f(0.f, 0.f));
-    line->setEnding(core::point2f(60.f, 0.f));
-
-    m_DCircleUnit.setAccel(1.f);
-    m_DCircleUnit.setMaxSpeed(3.f);
-    m_DCircleUnit.setShape(line);*/
-
-    /*
-    model::CircleShape *circle1 = new model::CircleShape();
-    circle1->setCenter(core::point2f(0.f, 0.f));
-    circle1->setRadius(20.f);
-
-    m_DUnit.setPos(core::point2f(0.f, 0.f));
-    m_DUnit.setAccel(1.f);
-    m_DUnit.setSpeed(0.f);
-    m_DUnit.setMaxSpeed(3.f);
-    m_DUnit.setVisible(true);
-    m_DUnit.setShape(circle1);
-
-    model::CircleShape *circle2 = new model::CircleShape();
-    circle2->setCenter(core::point2f(30.f, 30.f));
-    circle2->setRadius(20.f);
-
-    m_DCircleUnit.setPos(core::point2f(30.f, 30.f));
-    m_DCircleUnit.setAccel(1.f);
-    m_DCircleUnit.setSpeed(0.f);
-    m_DCircleUnit.setMaxSpeed(3.f);
-    m_DCircleUnit.setVisible(true);
-    m_DCircleUnit.setShape(circle2);
-
-    m_DUnit.move();*/
-
-    /*model::LineShape *line = new model::LineShape();
-    line->setOrigin(core::point2f(0.f, 25.f));
-    line->setEnding(core::point2f(0.f, -25.f));
-    line->setCenter(core::point2f(0.f, 0.f));
-
-    m_DCircleUnit.setAccel(1.f);
-    m_DCircleUnit.setSpeed(0.f);
-    m_DCircleUnit.setMaxSpeed(3.f);
-    m_DCircleUnit.setVisible(true);
-    m_DCircleUnit.setShape(line);
-
-    model::LineShape *line2 = new model::LineShape();
-    line2->setOrigin(core::point2f(0.f, 25.f));
-    line2->setEnding(core::point2f(0.f, -25.f));
-
-    model::LineShape *line3 = new model::LineShape();
-    line3->setOrigin(core::point2f(0.f, -25.f));
-    line3->setEnding(core::point2f(65.f, 0.f));
-
-    model::LineShape *line4 = new model::LineShape();
-    line4->setOrigin(core::point2f(65.f, 0.f));
-    line4->setEnding(core::point2f(0.f, 25.f));
-
-    model::PolygonShape *polygon = new model::PolygonShape();
-    polygon->addLine(*line2);
-    polygon->addLine(*line3);
-    polygon->addLine(*line4);
-
-    m_DUnit.setAccel(1.f);
-    m_DUnit.setSpeed(0.f);
-    m_DUnit.setMaxSpeed(3.f);
-    m_DUnit.setVisible(true);
-    m_DUnit.setShape(polygon);*/
 }
 
 Controller *Controller::instance()
