@@ -1,7 +1,7 @@
 #ifndef _FAR_CRY_MATH_AUX_HPP_
 #define _FAR_CRY_MATH_AUX_HPP_
 
-#include "macros.h"
+#include "islandengine_macros.h"
 
 namespace util
 {

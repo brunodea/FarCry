@@ -1,6 +1,6 @@
 #include <math.h>
 #include "glfw.h"
-#include "macros.h"
+#include "islandengine_macros.h"
 #include "model/CircleShape.h"
 #include "util/collision_functions.h"
 
