@@ -39,7 +39,11 @@ void setCallBacks()
 
 void initOpenGL()
 {
-    handleResize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    int w, h;
+
+    glfwGetWindowSize(&w, &h);
+
+    handleResize(w, h);
     glClearColor(0.f, 0.f, 0.f, 1.f);
 }
 
@@ -56,7 +60,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    if(!glfwOpenWindow(WINDOW_WIDTH, WINDOW_HEIGHT, 8, 8, 8, 8, 8, 8, GLFW_WINDOW))
+    if(!glfwOpenWindow(WINDOW_WIDTH, WINDOW_HEIGHT, 8, 8, 8, 8, 8, 8, GLFW_FULLSCREEN))
     {
         glfwTerminate();
         exit(EXIT_FAILURE);
