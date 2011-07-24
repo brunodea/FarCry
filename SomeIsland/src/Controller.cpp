@@ -3,6 +3,7 @@
 #include "IslandEngine.h"
 #include "macros.h"
 #include "Controller.h"
+#include "util/unit_loader_functions.h"
 
 using namespace someisland;
 
@@ -11,6 +12,8 @@ Controller *Controller::m_sInstance = NULL;
 Controller::Controller()
     : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true), m_Jeep(NULL, true)
 {
+    util::loadUnitFromFile("resources/units/Jeep.txt");
+
     model::LineShape *jeepLine1 = new model::LineShape();
     model::LineShape *jeepLine2 = new model::LineShape();
     model::LineShape *jeepLine3 = new model::LineShape();

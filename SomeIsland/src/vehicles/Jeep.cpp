@@ -9,8 +9,8 @@ Jeep::Jeep(model::Shape *shape, bool visible)
     setMaxFuel(500);
     setArmor(100);
     setName("Jeep");
-    setMaxSpeed(3.3f);
-    setAccel(1.1f);
+    setMaxSpeed(5.3f);
+    setAccel(1.8f);
     setPassOverTerrain(LAND);
 }
 

@@ -1,0 +1,6 @@
+type=Jeep
+currentFuel=500
+maxFuel=500
+armor=100
+name=Jeep
+passOverTerrain=LAND
