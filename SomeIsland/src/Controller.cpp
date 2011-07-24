@@ -12,7 +12,8 @@ Controller *Controller::m_sInstance = NULL;
 Controller::Controller()
     : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true), m_Jeep(NULL, true)
 {
-    util::loadUnitFromFile("resources/units/Jeep.txt");
+    vehicle::Vehicle* v = (vehicle::Vehicle*)util::loadUnitFromFile("C:/Users/Fabiano/Documents/Projetos/FarCry/codeblocks/bin/Debug/resources/units/Jeep.txt");
+    if(v != NULL) std::cout << v->maxFuel() << "\n";
 
     model::LineShape *jeepLine1 = new model::LineShape();
     model::LineShape *jeepLine2 = new model::LineShape();

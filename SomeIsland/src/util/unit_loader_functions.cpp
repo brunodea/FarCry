@@ -41,6 +41,12 @@ model::GameObject* util::loadUnitFromFile(std::string filename)
     while(unitFile.good())
     {
         std::getline(unitFile, line);
+
+        if(line.size() <= 0)
+        {
+            continue;
+        }
+
         cline = (char*)line.c_str();
         attrName = strtok(cline, "=");
         attrVal = strtok(NULL, "\0");
