@@ -1,7 +1,6 @@
 #ifndef _ISLAND_ESCAPE_JEEP_H
 #define _ISLAND_ESCAPE_JEEP_H
 
-#include "macros.h"
 #include "vehicles/Vehicle.hpp"
 
 namespace vehicle
