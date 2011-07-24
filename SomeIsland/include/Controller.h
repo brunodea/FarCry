@@ -2,6 +2,7 @@
 #define _SOME_ISLAND_CONTROLLER_HPP_
 
 #include "IslandEngine.h"
+#include "vehicles/Jeep.h"
 
 /* Singleton */
 
@@ -28,6 +29,7 @@ private:
 
     view::DrawableUnit m_DUnit;
     view::DrawableUnit m_DCircleUnit;
+    vehicle::Jeep m_Jeep;
 };
 } //end of namespace someisland.
 #endif // _SOME_ISLAND_CONTROLLER_HPP_

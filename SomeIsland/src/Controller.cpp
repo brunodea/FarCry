@@ -9,8 +9,37 @@ using namespace someisland;
 Controller *Controller::m_sInstance = NULL;
 
 Controller::Controller()
-    : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true)
+    : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true), m_Jeep(NULL, true)
 {
+    model::LineShape *jeepLine1 = new model::LineShape();
+    model::LineShape *jeepLine2 = new model::LineShape();
+    model::LineShape *jeepLine3 = new model::LineShape();
+    model::LineShape *jeepLine4 = new model::LineShape();
+
+    jeepLine1->setOrigin(core::point2f(-25.f, -35.f));
+    jeepLine1->setEnding(core::point2f(-25.f, 35.f));
+    jeepLine2->setOrigin(core::point2f(-25.f, 35.f));
+    jeepLine2->setEnding(core::point2f(25.f, 35.f));
+    jeepLine3->setOrigin(core::point2f(25.f, 35.f));
+    jeepLine3->setEnding(core::point2f(25.f, -35.f));
+    jeepLine4->setOrigin(core::point2f(25.f, -35.f));
+    jeepLine4->setEnding(core::point2f(-25.f, -35.f));
+
+    model::PolygonShape *jeepPolygon = new model::PolygonShape();
+    jeepPolygon->addLine(*jeepLine1);
+    jeepPolygon->addLine(*jeepLine2);
+    jeepPolygon->addLine(*jeepLine3);
+    jeepPolygon->addLine(*jeepLine4);
+
+    m_Jeep.setShape(jeepPolygon);
+    m_Jeep.setDirection(core::point2f(0.f, -1.f));
+
+    /*delete jeepLine1;
+    delete jeepLine2;
+    delete jeepLine3;
+    delete jeepLine4;
+    delete jeepPolygon;*/
+
     model::LineShape *l1 = new model::LineShape();
     model::LineShape *l2 = new model::LineShape();
     model::LineShape *l3 = new model::LineShape();
@@ -98,6 +127,9 @@ void Controller::onRender()
 
     glColor3f(0.f, 0.f, 1.f);
     m_DUnit.onRender();
+
+    glColor3f(1.f, 1.f, 0.f);
+    m_Jeep.onRender();
 }
 
 void Controller::onUpdate()
@@ -105,18 +137,22 @@ void Controller::onUpdate()
     float angle = PI/50.f;
     if(glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        m_DCircleUnit.rotate(-angle);
+        //m_DCircleUnit.rotate(-angle);
+        m_Jeep.rotate(-angle);
     }
     else if(glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        m_DCircleUnit.rotate(angle);
+        //m_DCircleUnit.rotate(angle);
+        m_Jeep.rotate(angle);
     }
 
-    m_DCircleUnit.move();
+    m_Jeep.move();
+
+    /*m_DCircleUnit.move();
     if(m_DUnit.shape()->collided(m_DCircleUnit.shape()))
     {
         std::cout << "Colidiram!\n";
-    }
+    }*/
 }
 
 void Controller::onKeyEvent(int key, int state)
@@ -124,8 +160,14 @@ void Controller::onKeyEvent(int key, int state)
     if(state == GLFW_PRESS)
     {
         if(key == GLFW_KEY_UP)
-            m_DCircleUnit.speedUp();
+        {
+            m_Jeep.speedUp();
+            //m_DCircleUnit.speedUp();
+        }
         else if(key == GLFW_KEY_DOWN)
-            m_DCircleUnit.speedDown();
+        {
+            m_Jeep.speedDown();
+            //m_DCircleUnit.speedDown();
+        }
     }
 }

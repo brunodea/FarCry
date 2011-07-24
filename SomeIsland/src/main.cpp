@@ -60,7 +60,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    if(!glfwOpenWindow(WINDOW_WIDTH, WINDOW_HEIGHT, 8, 8, 8, 8, 8, 8, GLFW_FULLSCREEN))
+    if(!glfwOpenWindow(WINDOW_WIDTH, WINDOW_HEIGHT, 8, 8, 8, 8, 8, 8, GLFW_WINDOW))
     {
         glfwTerminate();
         exit(EXIT_FAILURE);
