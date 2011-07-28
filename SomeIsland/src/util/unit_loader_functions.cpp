@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "util/unit_loader_functions.h"
 
+
 model::GameObject* util::loadUnitFromFile(std::string filename)
 {
     std::ifstream unitFile;
@@ -102,8 +103,38 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
         }
         else if(strcmp(attrName, "passOverTerrain"))
         {
+            char s = '|';
+            std::vector<std::string> v = splitString(attrVal, &s);
         }
     }
 
     return vehicle;
+}
+
+std::vector<std::string> splitString(const char* str, const char* separator)
+{
+    std::string terrains = std::string(str);
+    std::vector<std::string> vterrain;
+    std::string* tmpStr = new std::string();
+
+    for(unsigned int i = 0; i < terrains.size(); i++)
+    {
+        if(terrains.at(i) != *separator)
+        {
+            tmpStr->append(&terrains.at(i));
+        }
+        else
+        {
+            vterrain.push_back(*tmpStr);
+            delete tmpStr;
+            tmpStr = new std::string();
+        }
+    }
+
+    if(tmpStr != NULL)
+    {
+        delete tmpStr;
+    }
+
+    return vterrain;
 }
