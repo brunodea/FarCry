@@ -111,7 +111,7 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
     return vehicle;
 }
 
-std::vector<std::string> splitString(const char* str, const char* separator)
+std::vector<std::string> util::splitString(const char* str, const char* separator)
 {
     std::string terrains = std::string(str);
     std::vector<std::string> vterrain;
