@@ -11,7 +11,7 @@ using namespace someisland;
  */
 void GLFWCALL mousePosCallback(int x, int y)
 {
-    std::cout << x << "," << y << std::endl;
+    //std::cout << x << "," << y << std::endl;
 }
 
 void GLFWCALL keyEventCallback(int key, int state)
