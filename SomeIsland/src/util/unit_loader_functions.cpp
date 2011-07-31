@@ -110,7 +110,7 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
 
             for(unsigned int t = 0; t < v.size(); t++)
             {
-                vehicle->setPassOverTerrain(getTerrainFromString(v.at(t)));
+                vehicle->addPassOverTerrain(getTerrainFromString(v.at(t)));
             }
         }
     }

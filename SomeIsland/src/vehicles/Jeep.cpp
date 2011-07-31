@@ -11,7 +11,10 @@ Jeep::Jeep(model::Shape *shape, bool visible)
     setName("Jeep");
     setMaxSpeed(5.3f);
     setAccel(1.8f);
-    setPassOverTerrain(LAND);
+    addPassOverTerrain(LAND);
+    addPassOverTerrain(ROCK);
+    addPassOverTerrain(MUD);
+    addPassOverTerrain(SAND);
 }
 
 Jeep::~Jeep()

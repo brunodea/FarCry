@@ -13,7 +13,11 @@ Controller::Controller()
     : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true), m_Jeep(NULL, true)
 {
     vehicle::Vehicle* v = (vehicle::Vehicle*)util::loadUnitFromFile("bin/Debug/resources/units/Jeep.txt");
-    if(v != NULL) std::cout << v->maxFuel() << "\n";
+    std::vector<TerrainType> tt = v->passOverTerrain();
+    for(unsigned int i = 0; i < tt.size(); i++)
+    {
+        std::cout << tt.at(i) << std::endl;
+    }
 
     model::LineShape *jeepLine1 = new model::LineShape();
     model::LineShape *jeepLine2 = new model::LineShape();
