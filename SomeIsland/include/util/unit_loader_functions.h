@@ -20,6 +20,7 @@ namespace util
 
     std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
     std::vector<std::string> split(const std::string &s, char delim);
+    TerrainType getTerrainFromString(std::string str);
 }
 
 #endif

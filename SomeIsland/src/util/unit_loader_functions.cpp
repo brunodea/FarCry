@@ -110,7 +110,7 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
 
             for(unsigned int t = 0; t < v.size(); t++)
             {
-                std::cout << v.at(t) << std::endl;
+                vehicle->setPassOverTerrain(getTerrainFromString(v.at(t)));
             }
         }
     }
@@ -134,3 +134,14 @@ std::vector<std::string> util::split(const std::string &s, char delim)
     return split(s, delim, elems);
 }
 
+TerrainType util::getTerrainFromString(std::string str)
+{
+    if(strcmp(str.c_str(), "LAND") == 0) return LAND;
+    else if(strcmp(str.c_str(), "SHALLOW_WATER") == 0) return SHALLOW_WATER;
+    else if(strcmp(str.c_str(), "DEEP_WATER") == 0) return DEEP_WATER;
+    else if(strcmp(str.c_str(), "MUD") == 0) return MUD;
+    else if(strcmp(str.c_str(), "SAND") == 0) return SAND;
+    else if(strcmp(str.c_str(), "ROCK") == 0) return ROCK;
+
+    return LAND;
+}
