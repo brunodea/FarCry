@@ -15,9 +15,11 @@ namespace util
         std::string m_value;
     };
 
-    std::vector<std::string> splitString(const char* str, const char* separator);
     model::GameObject* loadUnitFromFile(std::string filename);
     vehicle::Vehicle* getVehicleFromAttributes(std::vector<UnitAttribute> attrs);
+
+    std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+    std::vector<std::string> split(const std::string &s, char delim);
 }
 
 #endif

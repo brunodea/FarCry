@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
+#include <sstream>
 #include "util/unit_loader_functions.h"
 
 
@@ -33,9 +34,9 @@ model::GameObject* util::loadUnitFromFile(std::string filename)
 
     char* baseClass = attrVal;
 
-    free(cline);
-    free(attrName);
-    free(attrVal);
+ //   free(cline);
+ //   free(attrName);
+ //   free(attrVal);
 
     std::vector<UnitAttribute> attributes;
 
@@ -63,7 +64,7 @@ model::GameObject* util::loadUnitFromFile(std::string filename)
 
     if(strcmp(baseClass, "Vehicle"))
     {
-        free(baseClass);
+//        free(baseClass);
 
         return (model::GameObject*)getVehicleFromAttributes(attributes);
     }
@@ -103,55 +104,33 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
         }
         else if(strcmp(attrName, "passOverTerrain") == 0)
         {
-            /*char s = '|';
-            std::vector<std::string> v = splitString(attrVal, &s);
+            char s = '|';
+            std::string aux = attrVal;
+            std::vector<std::string> v = split(aux, s);
 
             for(unsigned int t = 0; t < v.size(); t++)
             {
-                std::cout << v.at(i) << std::endl;
-            }*/
+                std::cout << v.at(t) << std::endl;
+            }
         }
     }
 
     return vehicle;
 }
 
-std::vector<std::string> util::splitString(const char* str, const char* separator)
+std::vector<std::string> &util::split(const std::string &s, char delim, std::vector<std::string> &elems)
 {
-    std::string terrains = std::string(str);
-    std::vector<std::string> vterrain;
-    std::string *tmpStr = new std::string();
-    unsigned int tmpI = 0;
-
-    for(unsigned int i = 0; i < terrains.length(); i++)
-    {
-        if(terrains[i] != separator[0])
-        {
-            tmpStr[tmpI++] = terrains[i];
-
-            std::cout << "tmpStr " << tmpStr[tmpI-1] << std::endl;
-        }
-        else
-        {
-            std::cout << "else " << tmpStr << std::endl;
-            char* tmpchar;
-            std::string tmp = std::string(strcpy(tmpchar, tmpStr->c_str()));
-            vterrain.push_back(tmp);
-
-            delete tmpStr;
-            tmpI = 0;
-            tmpStr = new std::string();
-        }
-    }
-
-    std::cout << "res " << tmpStr << std::endl;
-
-    if(tmpStr->length() > 0)
-    {
-        vterrain.push_back(*tmpStr);
-    }
-
-    delete tmpStr;
-
-    return vterrain;
+    std::stringstream ss(s);
+    std::string item;
+    while(std::getline(ss, item, delim))
+        elems.push_back(item);
+    return elems;
 }
+
+
+std::vector<std::string> util::split(const std::string &s, char delim)
+{
+    std::vector<std::string> elems;
+    return split(s, delim, elems);
+}
+
