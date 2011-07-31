@@ -103,13 +103,13 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
         }
         else if(strcmp(attrName, "passOverTerrain") == 0)
         {
-            char s = '|';
+            /*char s = '|';
             std::vector<std::string> v = splitString(attrVal, &s);
 
             for(unsigned int t = 0; t < v.size(); t++)
             {
                 std::cout << v.at(i) << std::endl;
-            }
+            }*/
         }
     }
 
