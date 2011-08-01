@@ -78,6 +78,7 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
 {
     vehicle::Vehicle* vehicle = new vehicle::Vehicle(NULL, false);
     unsigned int vsize = attrs.size();
+    model::PolygonShape* polygon = NULL;
 
     for(unsigned int i = 0; i < vsize; i++)
     {
@@ -111,6 +112,23 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
             for(unsigned int t = 0; t < v.size(); t++)
             {
                 vehicle->addPassOverTerrain(getTerrainFromString(v.at(t)));
+            }
+        }
+        else if(strcmp(attrName, "line") == 0)
+        {
+            if(polygon == NULL)
+            {
+                polygon = new model::PolygonShape();
+            }
+
+            char s = ',';
+            std::string aux = attrVal;
+            std::vector<std::string> v = split(aux, s);
+            std::vector<int> coords;
+
+            for(unsigned int t = 0; t < v.size(); t++)
+            {
+                coords.push_back(atoi(v.at(t).c_str()));
             }
         }
     }
