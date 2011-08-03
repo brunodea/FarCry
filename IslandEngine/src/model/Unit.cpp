@@ -49,7 +49,7 @@ void Unit::rotate(float ang)
 {
     setAngle(util::degreeToRad(angle())+ang);
 
-    for(unsigned int i = 0; shapes().size(); i++)
+    for(unsigned int i = 0; i < shapes().size(); i++)
     {
         shapes().at(i)->rotate(ang);
     }

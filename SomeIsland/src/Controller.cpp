@@ -67,6 +67,8 @@ Controller::Controller()
     polygon->addLine(*l2);
     polygon->addLine(*l3);
 
+    m_Jeep.addShape(polygon);
+
     m_DUnit.setPos(core::point2f(0.f, 0.f));
     m_DUnit.setAccel(1.f);
     m_DUnit.setSpeed(0.f);
