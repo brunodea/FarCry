@@ -1,6 +1,7 @@
 #ifndef _FAR_CRY_UNIT_H_
 #define _FAR_CRY_UNIT_H_
 
+#include <vector>
 #include "core/matrix_functions.hpp"
 #include "model/GameObject.hpp"
 #include "model/Shape.h"
@@ -10,9 +11,9 @@ namespace model
     class Unit : public GameObject
     {
     public:
-        Unit(Shape *shape, bool visible);
-        Unit(Shape *shape, bool visible, const core::Vector2 &direction);
-        Unit(Shape *shape, bool visible, const core::Vector2 &direction, float max_speed, float accel);
+        Unit(std::vector<Shape*> shapes, bool visible);
+        Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction);
+        Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction, float max_speed, float accel);
 
         void rotate(float ang);
 

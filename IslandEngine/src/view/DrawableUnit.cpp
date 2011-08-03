@@ -5,8 +5,8 @@
 
 using namespace view;
 
-DrawableUnit::DrawableUnit(model::Shape *shape, bool visible)
-    : model::Unit(shape, visible)
+DrawableUnit::DrawableUnit(std::vector<model::Shape*> shapes, bool visible)
+    : model::Unit(shapes, visible)
 {
 }
 
@@ -26,12 +26,10 @@ void DrawableUnit::onRender()
 
 void DrawableUnit::drawBounds()
 {
-    //core::Point2 p = pos();
-    //core::Point2 d = direction();
-
-    //printf("DUnit: %.2f %.2f %.2f %.2f\n", p[0], p[1], d[0], d[1]);
-
-    shape()->draw();
+    for(unsigned int i = 0; i < shapes().size(); i++)
+    {
+        shapes().at(i)->draw();
+    }
 }
 
 void DrawableUnit::drawDirection()

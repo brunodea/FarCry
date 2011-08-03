@@ -10,7 +10,7 @@ using namespace someisland;
 Controller *Controller::m_sInstance = NULL;
 
 Controller::Controller()
-    : m_bRunning(true), m_DUnit(NULL,true), m_DCircleUnit(NULL, true), m_Jeep(NULL, true)
+    : m_bRunning(true), m_DUnit(*(new std::vector<model::Shape*>),true), m_DCircleUnit(*(new std::vector<model::Shape*>), true), m_Jeep(*(new std::vector<model::Shape*>), true)
 {
     vehicle::Vehicle* v = (vehicle::Vehicle*)util::loadUnitFromFile("bin/Debug/resources/units/Jeep.txt");
     std::vector<TerrainType> tt = v->passOverTerrain();
@@ -39,7 +39,8 @@ Controller::Controller()
     jeepPolygon->addLine(*jeepLine3);
     jeepPolygon->addLine(*jeepLine4);
 
-    m_Jeep.setShape(jeepPolygon);
+    //m_Jeep.setShape(jeepPolygon);
+    m_Jeep.addShape(jeepPolygon);
     m_Jeep.setDirection(core::point2f(0.f, -1.f));
 
     /*delete jeepLine1;
@@ -71,7 +72,8 @@ Controller::Controller()
     m_DUnit.setSpeed(0.f);
     m_DUnit.setMaxSpeed(3.f);
     m_DUnit.setVisible(true);
-    m_DUnit.setShape(polygon);
+    //m_DUnit.setShape(polygon);
+    m_DUnit.addShape(polygon);
     m_DUnit.move();
 
     model::CircleShape *circle1 = new model::CircleShape();
@@ -83,7 +85,8 @@ Controller::Controller()
     m_DCircleUnit.setSpeed(0.f);
     m_DCircleUnit.setMaxSpeed(3.f);
     m_DCircleUnit.setVisible(true);
-    m_DCircleUnit.setShape(circle1);
+//    m_DCircleUnit.setShape(circle1);
+    m_DCircleUnit.addShape(circle1);
 }
 
 Controller *Controller::instance()

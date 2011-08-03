@@ -76,7 +76,7 @@ model::GameObject* util::loadUnitFromFile(std::string filename)
 
 vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute> attrs)
 {
-    vehicle::Vehicle* vehicle = new vehicle::Vehicle(NULL, false);
+    vehicle::Vehicle* vehicle = new vehicle::Vehicle(*(new std::vector<model::Shape*>), false);
     unsigned int vsize = attrs.size();
     model::PolygonShape* polygon = NULL;
 
