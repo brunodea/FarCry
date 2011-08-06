@@ -3,13 +3,14 @@
 
 #include "model/Unit.h"
 #include "model/CircleShape.h"
+#include "view/Animation.hpp"
 
 namespace view
 {
     class DrawableUnit:public model::Unit
     {
     public:
-        DrawableUnit(std::vector<model::Shape*> shapes, bool visible);
+        DrawableUnit(std::vector<model::Shape*> shapes, bool visible = true, GLuint image_id = -1);
 
         virtual ~DrawableUnit();
 
@@ -18,6 +19,8 @@ namespace view
 
         void drawBounds();
         void drawDirection();
+    protected:
+        Animation *m_Animation;
     };
 }
 

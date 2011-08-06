@@ -5,17 +5,20 @@
 
 using namespace view;
 
-DrawableUnit::DrawableUnit(std::vector<model::Shape*> shapes, bool visible)
+DrawableUnit::DrawableUnit(std::vector<model::Shape*> shapes, bool visible, GLuint image_id)
     : model::Unit(shapes, visible)
 {
+    m_Animation = new Animation(core::point2f(0.f,0.f), image_id);
 }
 
 DrawableUnit::~DrawableUnit()
 {
+    delete m_Animation;
 }
 
 void DrawableUnit::onUpdate()
 {
+    m_Animation->setPos(pos());
 }
 
 void DrawableUnit::onRender()
