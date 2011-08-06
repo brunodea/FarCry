@@ -19,7 +19,7 @@ namespace view
         }; //end of enum Type.
     public:
         SingleAnim(Type type, int height)
-            : m_iCurrentFrame(0), m_vFrames(), m_fLastTime(-1), m_Type(type), m_iHeight(height), m_fAngle(0.f)
+            : m_iCurrentFrame(0), m_vFrames(), m_fLastTime(-1), m_Type(type), m_iHeight(height)
         {}
 
         ~SingleAnim()
@@ -40,6 +40,7 @@ namespace view
         {
             if(!m_vFrames.empty())
                 return m_vFrames.at(m_iCurrentFrame);
+            return NULL;
         }
 
         void resetAnim()
@@ -47,10 +48,11 @@ namespace view
 
         }
 
-        void render(const core::Point2 &pos, int file_y, GLuint texture_id)
+        void render(const core::Point2 &pos, int file_y, GLuint texture_id, int tex_w, int tex_h)
         {
             if(m_vFrames.empty())
                 return;
+            changeFrame();
 
             AnimFrame *curr_frame = m_vFrames.at(m_iCurrentFrame);
             int curr_width = curr_frame->width();
@@ -76,30 +78,38 @@ namespace view
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, texture_id);
 
-            glPushMatrix();
-                glRotatef(m_fAngle, 0,0,1.f);
-                glBegin(GL_QUADS);
-                    glTexCoord2d(file_x,file_y);
-                    glVertex2f(v1[0],v1[1]);
+            glBegin(GL_QUADS);
+                glTexCoord2f((float)file_x/tex_w,(float)file_y/tex_h);
+                glVertex2f(v1[0],v1[1]);
 
-                    glTexCoord2d(file_x+curr_width, file_y);
-                    glVertex2f(v2[0],v2[1]);
+                glTexCoord2f((float)(file_x+curr_width)/tex_w, (float)file_y/tex_h);
+                glVertex2f(v2[0],v2[1]);
 
-                    glTexCoord2d(file_x+curr_width, file_y+m_iHeight);
-                    glVertex2f(v3[0],v3[1]);
+                glTexCoord2f((float)(file_x+curr_width)/tex_w, (float)(file_y+m_iHeight)/tex_h);
+                glVertex2f(v3[0],v3[1]);
 
-                    glTexCoord2d(file_x, file_y+m_iHeight);
-                    glVertex2f(v4[0],v4[1]);
-                glEnd();
+                glTexCoord2f((float)file_x/tex_w,(float)(file_y+m_iHeight)/tex_h);
+                glVertex2f(v4[0],v4[1]);
+            glEnd();
 
-                glDisable(GL_TEXTURE_2D);
-                glDisable(GL_BLEND);
-            glPopMatrix();
+            glDisable(GL_TEXTURE_2D);
+            glDisable(GL_BLEND);
+        }
+
+        void rotateShapes(float rad)
+        {
+            for(unsigned int i = 0; i < m_vFrames.size(); i++)
+                m_vFrames.at(i)->rotateShapes(rad);
+        }
+
+        void setShapesCenter(const core::Point2 &center)
+        {
+            for(unsigned int i = 0; i < m_vFrames.size(); i++)
+                m_vFrames.at(i)->setShapesCenter(center);
         }
 
         Type type() { return m_Type; }
         int height() { return m_iHeight; }
-        void setAngle(float degrees) { m_fAngle = degrees; }
 
     private:
         void changeFrame()
@@ -128,8 +138,6 @@ namespace view
 
         Type m_Type;
         int m_iHeight;
-
-        float m_fAngle;
     }; //end of class SingleAnim.
 } //end of namespace view.
 

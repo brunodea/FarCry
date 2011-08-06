@@ -17,30 +17,57 @@ namespace view
         int width() { return m_iWidth; }
         double duration() { return m_fDuration; }
 
-        std::vector<counted_ptr<model::Shape> > *shapes() { return &m_Shapes; }
-        void addShape(counted_ptr<model::Shape> shape) { m_Shapes.push_back(shape); }
+        std::vector<model::Shape *> *shapes() { return &m_Shapes; }
+        void addShape(model::Shape *shape) { m_Shapes.push_back(shape); }
 
         bool collided(AnimFrame *anim)
         {
-            std::vector<counted_ptr<model::Shape> > *shapes = anim->shapes();
-            for(std::vector<counted_ptr<model::Shape> >::iterator it = shapes->begin(); it != shapes->end(); it++)
+            std::vector<model::Shape *> *shapes = anim->shapes();
+            for(std::vector<model::Shape *>::iterator it = shapes->begin(); it != shapes->end(); it++)
             {
-                counted_ptr<model::Shape> ss = *it;
-                for(std::vector<counted_ptr<model::Shape> >::iterator mit = m_Shapes.begin(); mit != m_Shapes.end(); mit++)
+                model::Shape *ss = *it;
+                for(std::vector<model::Shape *>::iterator mit = m_Shapes.begin(); mit != m_Shapes.end(); mit++)
                 {
-                    counted_ptr<model::Shape> s = *mit;
-                    if(s.get()->collided(ss.get()))
+                    model::Shape *s = *mit;
+                    if(s->collided(ss))
                         return true;
                 }
             }
             return false;
         }
 
+        void rotateShapes(float rad)
+        {
+            for(std::vector<model::Shape *>::iterator it = m_Shapes.begin(); it != m_Shapes.end(); it++)
+            {
+                model::Shape *s = *it;
+                s->rotate(rad);
+            }
+        }
+
+        void setShapesCenter(const core::Point2 &center)
+        {
+            for(std::vector<model::Shape *>::iterator it = m_Shapes.begin(); it != m_Shapes.end(); it++)
+            {
+                model::Shape *s = *it;
+                s->setCenter(center);
+            }
+        }
+
+        void drawShapes()
+        {
+            for(std::vector<model::Shape *>::iterator it = m_Shapes.begin(); it != m_Shapes.end(); it++)
+            {
+                model::Shape *s = *it;
+                s->draw();
+            }
+        }
+
     private:
         int m_iWidth;
         double m_fDuration;
 
-        std::vector<counted_ptr<model::Shape> > m_Shapes;
+        std::vector<model::Shape *> m_Shapes;
 
     }; //end of class AnimFrame.
 } //end of namespace view.

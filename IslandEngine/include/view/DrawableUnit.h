@@ -10,7 +10,7 @@ namespace view
     class DrawableUnit:public model::Unit
     {
     public:
-        DrawableUnit(std::vector<model::Shape*> shapes, bool visible = true, GLuint image_id = -1);
+        DrawableUnit(bool visible = true, GLuint image_id = -1);
 
         virtual ~DrawableUnit();
 
@@ -19,8 +19,6 @@ namespace view
 
         void drawBounds();
         void drawDirection();
-    protected:
-        Animation *m_Animation;
     };
 }
 

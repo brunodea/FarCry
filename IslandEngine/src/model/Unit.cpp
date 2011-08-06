@@ -3,18 +3,18 @@
 
 using namespace model;
 
-Unit::Unit(std::vector<Shape*> shapes, bool visible)
-    : GameObject(shapes, visible), m_Direction(core::vector2f(1.f,0.f)), m_fMaxSpeed(0.f), m_fSpeed(0.f), m_fAcceleration(0.f)
+Unit::Unit(bool visible)
+    : GameObject(visible), m_Direction(core::vector2f(1.f,0.f)), m_fMaxSpeed(0.f), m_fSpeed(0.f), m_fAcceleration(0.f)
 {
 }
 
-Unit::Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction)
-    : GameObject(shapes, visible), m_Direction(direction), m_fMaxSpeed(0.f), m_fSpeed(0.f), m_fAcceleration(0.f)
+Unit::Unit(bool visible, const core::Vector2 &direction)
+    : GameObject(visible), m_Direction(direction), m_fMaxSpeed(0.f), m_fSpeed(0.f), m_fAcceleration(0.f)
 {
 }
 
-Unit::Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction, float max_speed, float accel)
-    : GameObject(shapes, visible), m_Direction(direction), m_fMaxSpeed(max_speed), m_fSpeed(0.f), m_fAcceleration(accel)
+Unit::Unit(bool visible, const core::Vector2 &direction, float max_speed, float accel)
+    : GameObject(visible), m_Direction(direction), m_fMaxSpeed(max_speed), m_fSpeed(0.f), m_fAcceleration(accel)
 {
 }
 
@@ -23,12 +23,7 @@ void Unit::move()
     core::Point2 new_pos = pos() + (m_Direction*m_fSpeed);
     setPos(new_pos);
 
-    for(unsigned int i = 0; i < shapes().size(); i++)
-    {
-        shapes().at(i)->setCenter(new_pos);
-    }
-
-    //shape()->setCenter(new_pos);
+    animation()->setShapesCenter(new_pos);
 }
 
 void Unit::speedUp()
@@ -49,11 +44,7 @@ void Unit::rotate(float ang)
 {
     setAngle(util::degreeToRad(angle())+ang);
 
-    for(unsigned int i = 0; i < shapes().size(); i++)
-    {
-        shapes().at(i)->rotate(ang);
-    }
-    //shape()->rotate(ang);
+    animation()->rotateShapes(ang);
 
     core::Matrix3 transf_mat = core::rotate2d(ang);
     core::Vector3 dir = core::toVector3f(m_Direction);

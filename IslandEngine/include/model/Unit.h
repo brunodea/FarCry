@@ -11,9 +11,9 @@ namespace model
     class Unit : public GameObject
     {
     public:
-        Unit(std::vector<Shape*> shapes, bool visible);
-        Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction);
-        Unit(std::vector<Shape*> shapes, bool visible, const core::Vector2 &direction, float max_speed, float accel);
+        Unit(bool visible);
+        Unit(bool visible, const core::Vector2 &direction);
+        Unit(bool visible, const core::Vector2 &direction, float max_speed, float accel);
 
         void rotate(float ang);
 

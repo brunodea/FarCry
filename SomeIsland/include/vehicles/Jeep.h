@@ -8,7 +8,7 @@ namespace vehicle
     class Jeep:public vehicle::Vehicle
     {
         public:
-            Jeep(std::vector<model::Shape*> shapes, bool visible);
+            Jeep(bool visible);
             virtual ~Jeep();
 
         private:

@@ -2,36 +2,40 @@
 #include <stdio.h>
 #include "glfw.h"
 #include "view/DrawableUnit.h"
+#include "view/SingleAnim.hpp"
+#include "view/Animation.hpp"
+#include "view/AnimFrame.hpp"
 
 using namespace view;
 
-DrawableUnit::DrawableUnit(std::vector<model::Shape*> shapes, bool visible, GLuint image_id)
-    : model::Unit(shapes, visible)
+DrawableUnit::DrawableUnit(bool visible, GLuint image_id)
+    : model::Unit(visible)
 {
-    m_Animation = new Animation(core::point2f(0.f,0.f), image_id);
 }
 
 DrawableUnit::~DrawableUnit()
 {
-    delete m_Animation;
 }
 
 void DrawableUnit::onUpdate()
 {
-    m_Animation->setPos(pos());
 }
 
 void DrawableUnit::onRender()
 {
     drawBounds();
     drawDirection();
+    animation()->render();
 }
 
 void DrawableUnit::drawBounds()
 {
-    for(unsigned int i = 0; i < shapes().size(); i++)
+    SingleAnim *sanim = animation()->currentSingleAnim();
+    if(sanim != NULL)
     {
-        shapes().at(i)->draw();
+        AnimFrame *frame = sanim->currentFrame();
+        if(frame != NULL)
+            frame->drawShapes();
     }
 }
 

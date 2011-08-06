@@ -11,7 +11,7 @@ namespace vehicle
     class Vehicle:public view::DrawableUnit
     {
         public:
-            Vehicle(std::vector<model::Shape*> shapes, bool visible):DrawableUnit(shapes, visible) {}
+            Vehicle(bool visible):DrawableUnit(visible) {}
 
             void setCurrentFuel(int fuelLevel) { m_CurrentFuel = fuelLevel; }
             void setMaxFuel(int maxFuelLevel) { m_MaxFuel = maxFuelLevel; }

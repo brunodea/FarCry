@@ -76,6 +76,8 @@ model::GameObject* util::loadUnitFromFile(std::string filename)
 
 vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute> attrs)
 {
+    return NULL;
+    /*
     vehicle::Vehicle* vehicle = new vehicle::Vehicle(*(new std::vector<model::Shape*>), false);
     unsigned int vsize = attrs.size();
     model::PolygonShape* polygon = NULL;
@@ -134,6 +136,7 @@ vehicle::Vehicle* util::getVehicleFromAttributes(std::vector<util::UnitAttribute
     }
 
     return vehicle;
+    */
 }
 
 std::vector<std::string> &util::split(const std::string &s, char delim, std::vector<std::string> &elems)

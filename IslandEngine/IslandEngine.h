@@ -16,5 +16,9 @@
 #include "util/math_aux.hpp"
 
 #include "view/DrawableUnit.h"
+#include "view/Texture.hpp"
+#include "view/SingleAnim.hpp"
+#include "view/Animation.hpp"
+#include "view/AnimFrame.hpp"
 
 #endif

@@ -50,6 +50,7 @@ void initOpenGL()
 void clear()
 {
     delete CONTROLLER;
+    delete view::Texture::instance();
 }
 
 

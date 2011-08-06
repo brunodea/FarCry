@@ -2,8 +2,8 @@
 
 using namespace vehicle;
 
-Jeep::Jeep(std::vector<model::Shape*> shapes, bool visible)
-    : vehicle::Vehicle(shapes, visible)
+Jeep::Jeep(bool visible)
+    : vehicle::Vehicle(visible)
 {
     setCurrentFuel(500);
     setMaxFuel(500);

@@ -4,20 +4,21 @@
 #include "macros.h"
 #include "Controller.h"
 #include "util/unit_loader_functions.h"
+#include "counted_ptr.h"
 
 using namespace someisland;
 
 Controller *Controller::m_sInstance = NULL;
 
 Controller::Controller()
-    : m_bRunning(true), m_DUnit(*(new std::vector<model::Shape*>),true), m_DCircleUnit(*(new std::vector<model::Shape*>), true), m_Jeep(*(new std::vector<model::Shape*>), true)
+    : m_bRunning(true), m_DUnit(true), m_DCircleUnit(true), m_Jeep(true)
 {
-    vehicle::Vehicle* v = (vehicle::Vehicle*)util::loadUnitFromFile("bin/Debug/resources/units/Jeep.txt");
-    std::vector<TerrainType> tt = v->passOverTerrain();
-    for(unsigned int i = 0; i < tt.size(); i++)
-    {
-        std::cout << tt.at(i) << std::endl;
-    }
+    //vehicle::Vehicle* v = (vehicle::Vehicle*)util::loadUnitFromFile("bin/Debug/resources/units/Jeep.txt");
+    //std::vector<TerrainType> tt = v->passOverTerrain();
+    //for(unsigned int i = 0; i < tt.size(); i++)
+    //{
+    //    std::cout << tt.at(i) << std::endl;
+    //}
 
     model::LineShape *jeepLine1 = new model::LineShape();
     model::LineShape *jeepLine2 = new model::LineShape();
@@ -39,8 +40,20 @@ Controller::Controller()
     jeepPolygon->addLine(*jeepLine3);
     jeepPolygon->addLine(*jeepLine4);
 
-    //m_Jeep.setShape(jeepPolygon);
-    m_Jeep.addShape(jeepPolygon);
+    view::Texture::instance()->addTexture("bin/Debug/resources/units/Jeep.tga", "Jeep");
+
+    view::AnimFrame *frame = new view::AnimFrame(50, 2.0);
+    frame->addShape(jeepPolygon);
+    view::AnimFrame *frame2 = new view::AnimFrame(50, 2.0);
+    frame2->addShape(new model::PolygonShape(*jeepPolygon));
+    view::SingleAnim *sanim = new view::SingleAnim(view::SingleAnim::STANDING, 70);
+    sanim->addFrame(frame);
+    sanim->addFrame(frame2);
+
+    m_Jeep.animation()->addAnim(sanim);
+    m_Jeep.animation()->setImageID(view::Texture::instance()->texture("Jeep"));
+    m_Jeep.animation()->setTextureSize(100,70);
+
     m_Jeep.setDirection(core::point2f(0.f, -1.f));
 
     /*delete jeepLine1;
@@ -49,6 +62,7 @@ Controller::Controller()
     delete jeepLine4;
     delete jeepPolygon;*/
 
+    /*
     model::LineShape *l1 = new model::LineShape();
     model::LineShape *l2 = new model::LineShape();
     model::LineShape *l3 = new model::LineShape();
@@ -89,6 +103,7 @@ Controller::Controller()
     m_DCircleUnit.setVisible(true);
 //    m_DCircleUnit.setShape(circle1);
     m_DCircleUnit.addShape(circle1);
+    */
 }
 
 Controller *Controller::instance()
@@ -135,11 +150,11 @@ void Controller::onRender()
 
     glTranslatef(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f, 0.f);
 
-    glColor3f(0.f,1.f,0.f);
-    m_DCircleUnit.onRender();
+    //glColor3f(0.f,1.f,0.f);
+    //m_DCircleUnit.onRender();
 
-    glColor3f(0.f, 0.f, 1.f);
-    m_DUnit.onRender();
+    //glColor3f(0.f, 0.f, 1.f);
+    //m_DUnit.onRender();
 
     glColor3f(1.f, 1.f, 0.f);
     m_Jeep.onRender();
